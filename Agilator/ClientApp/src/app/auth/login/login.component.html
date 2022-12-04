@@ -1,19 +1,21 @@
 <section id="form">
     <h2>Login</h2>
     <p>Don't have an account? <a routerLink="/auth/register">Register here</a></p>
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
     <div class="box">
         <h3>User details</h3>
 
         <div class="input-element">
             <label>Email</label>
-            <input type="email" placeholder="j.smith@email.com">
+            <input formControlName="email" type="email" placeholder="j.smith@email.com">
         </div>
         <div class="input-element">
             <label>Password</label>
-            <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            <input formControlName="password" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
         </div>
-        <button class="btn-primary">Login</button>
+        <button type="submit" class="btn-primary">Login</button>
 
         <a href="">Forgot password?</a>
     </div>
+    </form>
 </section>

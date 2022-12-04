@@ -6,9 +6,6 @@
         [Required(ErrorMessage = "First name is required")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Middle name is required")]
-        public string MiddleName { get; set; }
-
         [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
 

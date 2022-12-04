@@ -1,29 +1,33 @@
 <section id="form">
     <h2>Register</h2>
     <p>Already have an account? <a routerLink="/auth/login">Login here</a></p>
-    <div class="box">
-        <h3>User details</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+        <div class="box">
+            <h3>User details</h3>
 
-        <div class="input-element">
-            <label>First Name</label>
-            <input type="text" placeholder="John">
+            <div class="input-element">
+                <label>First Name</label>
+                <input formControlName="firstName" type="text" placeholder="John">
+            </div>
+            <div class="input-element">
+                <label>Last Name</label>
+                <input formControlName="lastName" type="text" placeholder="Smith">
+            </div>
+            <div class="input-element">
+                <label>Email</label>
+                <input formControlName="email" type="email" placeholder="j.smith@email.com">
+            </div>
+            <div class="input-element">
+                <label>Password</label>
+                <input formControlName="password" type="password"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            </div>
+            <div class="input-element">
+                <label>Confirm Password</label>
+                <input formControlName="confirmPassword" type="password"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            </div>
+            <button type="submit" class="btn-primary">Register</button>
         </div>
-        <div class="input-element">
-            <label>Last Name</label>
-            <input type="text" placeholder="Smith">
-        </div>
-        <div class="input-element">
-            <label>Email</label>
-            <input type="email" placeholder="j.smith@email.com">
-        </div>
-        <div class="input-element">
-            <label>Password</label>
-            <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-        </div>
-        <div class="input-element">
-            <label>Confirm Password</label>
-            <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-        </div>
-        <button class="btn-primary">Register</button>
-    </div>
+    </form>
 </section>
