@@ -57,7 +57,25 @@ body {
 }
 
 .btn-primary:hover {
-    transform: scale(1.03)
+    transform: scale(1.03);
+}
+
+#nav {
+    display: flex;
+    gap: 20px;
+
+    li a {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--clr-black);
+        transition: 150ms;
+        font-weight: 400;
+    }
+
+    li a:hover {
+        transform: scale(1.05);
+        font-weight: 500;
+    }
 }
 
 #form {
