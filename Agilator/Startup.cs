@@ -1,5 +1,6 @@
 using Agilator.Data;
 using Agilator.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,9 @@ namespace Agilator
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddAutoMapper(typeof(MappingProfile));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
