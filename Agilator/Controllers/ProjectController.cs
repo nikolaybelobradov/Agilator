@@ -11,11 +11,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    [Authorize]
     [Route("api/project")]
     [ApiController]
+
     public class ProjectController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -27,8 +28,7 @@
             _repository = repository;
             _mapper = mapper;
         }
-
-        [Authorize]
+        
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<Project>>> All()
         {
@@ -39,7 +39,6 @@
             return result;
         }
 
-        [Authorize]
         [HttpPost("create")]
         public async Task<ActionResult<Project>> Create([FromBody]ProjectDto model)
         {
@@ -63,5 +62,57 @@
 
             return Ok(new ResponseDto { IsSuccessful = true });
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Project>> GetProject(string id)
+        {
+            var model = await _repository.SelectById<Project>(id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return model;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditProject(string id, Project model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _repository.UpdateAsync(model);
+            }
+            catch (Exception e)
+            {
+                var errorMessages = new HashSet<string> { e.ToString() };
+                return BadRequest(new ResponseDto { Errors = errorMessages });
+            }
+
+            return Ok(new ResponseDto { IsSuccessful = true });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Project>> DeleteProject(string id)
+        {
+            var model = await _repository.SelectById<Project>(id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            await _repository.DeleteAsync(model);
+
+            return model;
+        }
+
+
+
     }
 }
