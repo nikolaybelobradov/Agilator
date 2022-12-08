@@ -18,24 +18,30 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   register (route: string, body: IUserRegistrationDto) {
-    return this.http.post<IAuthResponseDto> (this.createCompleteRoute(route, environment.baseUrl), body);
+    return this.http.post<IAuthResponseDto> (this.getRoute(route), body);
   }
 
   login (route: string, body: IUserLoginDto) {
-    return this.http.post<IAuthResponseDto> (this.createCompleteRoute(route, environment.baseUrl), body);
+    return this.http.post<IAuthResponseDto> (this.getRoute(route), body);
   }
 
   logout() {
     localStorage.removeItem("token");
-    this.isAuthenticated();
+    this.authChangeSub.next(false);
   }
 
   isAuthenticated() {    
-    const token = localStorage.getItem("token"); 
-    return token && !this.jwtHelper.isTokenExpired(token);
+    const token = localStorage.getItem("token");
+
+    if(token && !this.jwtHelper.isTokenExpired(token)){
+      this.authChangeSub.next(true);
+      return true;
+    }
+
+    return false;
   }
 
-  private createCompleteRoute = (route: string, baseUrl: string) => {
-    return `${baseUrl}/${route}`;
+  private getRoute = (route: string) => {
+    return `${environment.baseUrl}/${route}`;
   }
 }

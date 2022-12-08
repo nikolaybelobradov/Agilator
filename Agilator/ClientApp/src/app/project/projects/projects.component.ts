@@ -10,7 +10,7 @@ import { ProjectService } from '../project.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  projects: IProject[] = [];
+  projects!: IProject[];
 
   constructor(private projectService: ProjectService) { };
 

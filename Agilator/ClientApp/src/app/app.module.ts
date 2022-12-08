@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {CoreModule} from './core/core.module';
+import { CoreModule } from './core/core.module';
 import { JwtModule } from "@auth0/angular-jwt";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProjectModule } from './project/project.module';
 import { environment } from 'src/environments/environment';
+import { ErrorHandlerService } from './shared/errors/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,12 @@ import { environment } from 'src/environments/environment';
         disallowedRoutes: ['']
       }
     })
-  ],  
-  providers: [],
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorHandlerService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 
