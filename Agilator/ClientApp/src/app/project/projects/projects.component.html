@@ -1,0 +1,12 @@
+<section id="allProjects">
+    <h1>My projects</h1>
+    <p>Not enough? <a routerLink="/project/create"> Create a project </a></p>
+    <div class="box-container">
+        <div *ngFor="let project of projects;">
+        <div class="box" >
+            <i class="fa-solid fa-list-check"></i>
+            <span>{{project.name}}</span>
+        </div>
+    </div>
+    </div>
+</section>

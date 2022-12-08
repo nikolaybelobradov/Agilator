@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.authService.login("api/authentication/login", user).subscribe({
         next: (response: IAuthResponseDto) => {
           localStorage.setItem("token", response.token);
-          this.authService.isAuthenticated(response.isSuccessful);
+          this.authService.isAuthenticated();
           console.log("Successful login")
         } ,
         error: (err: HttpErrorResponse) => console.log(err.error.errors)

@@ -6,7 +6,7 @@
     <button *ngIf="!isAuthenticated" class="btn-primary" routerLink="/auth/login">Get Started</button>
 
     <ul *ngIf="isAuthenticated" id="nav" role="list">
-        <li><a href="">My Projects</a></li>
+        <li><a routerLink="/project/all">My Projects</a></li>
         <li><a (click)="logout()">Logout</a></li>
     </ul>
 </header>

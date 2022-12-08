@@ -1,0 +1,18 @@
+<section id="form">
+    <h1>Create a project</h1>
+    <form [formGroup]="createProjectForm" (ngSubmit)="create(createProjectForm.value)">
+    <div class="box">
+        <h2>Project details</h2>
+
+        <div class="input-element">
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" type="text" placeholder="MyProject">
+        </div>
+        <div class="input-element">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" placeholder="Add your project description here..." rows="6"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Create</button>
+    </div>
+    </form>
+</section>

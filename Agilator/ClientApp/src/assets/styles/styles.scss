@@ -12,34 +12,31 @@
     --border-size-1: 0.0625rem;
 }
 
-h1, h2, h3{
+h1, h2{
     color: var(--clr-black);
 }
 
 h1{
-    font-size: 4.25rem;
-    line-height: 4.75rem;
-    font-weight: 700;
-}
-
-h2 {
     font-size: 2.25rem;
     line-height: 2.5rem;
     font-weight: 700;
 }
 
-h3 {
+h2 {
     font-size: 1.5rem;
     line-height: 2.19rem;
 }
 
 a{
+    display: inline-block;
     text-decoration: none;
     cursor: pointer;
+    transition: 150ms;
 }
 
 body {
     font-family: 'DM Sans', sans-serif;
+    // background: #404040;
 }
 
 .btn-primary {
@@ -64,11 +61,8 @@ body {
     display: flex;
     gap: 20px;
 
-    li a {
-        display: inline-block;
-        text-decoration: none;
-        color: var(--clr-black);
-        transition: 150ms;
+    li a {        
+        color: var(--clr-black);        
         font-weight: 400;
     }
 
@@ -87,9 +81,7 @@ body {
     gap: 1.875rem;
 
     a {
-        display: inline-block;
         color: var(--clr-primary);
-        transition: 150ms;
     }
 
     p {
@@ -117,20 +109,30 @@ body {
         gap: 2.5rem;
         padding: 2.5rem;
         
-        input {
-            height: 4.125rem;
+        input, textarea {
             width: 31.25rem;
             border: var(--border-size-1) solid #eff0f6;
             border-radius: 2.875rem;
             box-shadow: 0.125rem 0 0.375rem 0 rgb(19, 18, 66, 0.07);
-            padding: 0 2.5rem;
             color: var(--clr-dark-gray);
             font-size: 1.125rem;
             line-height: 1.25rem;
         }
 
+        input{
+            height: 4.125rem;            
+            padding: 0 2.5rem;        
+        }
+        
+        textarea{
+            resize: none;
+            padding: 1.7rem 2.5rem;
+        }
+
         input:focus,
-        input:hover {
+        input:hover,
+        textarea:focus,
+        textarea:hover {
             border: var(--border-size-1) solid #d9dbe9;
             outline: none;
         }

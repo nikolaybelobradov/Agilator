@@ -1,6 +1,8 @@
 using Agilator.Data;
 using Agilator.JwtFeatures;
 using Agilator.Models;
+using Agilator.Repositories;
+using Agilator.Repositories.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -18,6 +22,8 @@ namespace Agilator
 {
     public class Startup
     {
+        public static ILogger<ConsoleLoggerProvider> AppLogger = null;
+        public static ILoggerFactory loggerFactory = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -55,6 +61,15 @@ namespace Agilator
                     };
                 });
 
+            //TODO REMOVE
+            services.AddLogging(builder => builder
+            .AddConsole()
+            .AddFilter(level => level >= LogLevel.Trace)
+            );
+            loggerFactory = services.BuildServiceProvider().GetService<ILoggerFactory>();
+            AppLogger = loggerFactory.CreateLogger<ConsoleLoggerProvider>();
+
+
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
@@ -70,6 +85,7 @@ namespace Agilator
 
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<JwtHandler>();
+            services.AddScoped<IRepository, Repository>();
 
         }
 

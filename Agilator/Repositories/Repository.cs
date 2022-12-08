@@ -1,20 +1,22 @@
 ﻿namespace Agilator.Repositories
 {
+    using Agilator.Data;
     using Agilator.Repositories.Interfaces;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    public class Repository<TDbContext> : IRepository where TDbContext : DbContext
+    public class Repository : IRepository
     {
-        protected TDbContext dbContext;
+        protected ApplicationDbContext dbContext;
 
-        public Repository(TDbContext context)
+        public Repository(ApplicationDbContext context)
         {
             dbContext = context;
+            
         }
         public async Task CreateAsync<T>(T entity) where T : class
         {
-            this.dbContext.Set<T>().Add(entity);
+                await this.dbContext.Set<T>().AddAsync(entity);
 
             _ = await this.dbContext.SaveChangesAsync();
         }
@@ -24,7 +26,9 @@
             this.dbContext.Set<T>().Remove(entity);
 
             _ = await this.dbContext.SaveChangesAsync();
+
         }
+
         public async Task<List<T>> SelectAll<T>() where T : class
         {
             return await this.dbContext.Set<T>().ToListAsync();

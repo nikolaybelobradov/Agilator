@@ -1,6 +1,7 @@
 ﻿namespace Agilator.Data
 {
     using Agilator.DataTransfer.Authentication;
+    using Agilator.DataTransfer.Project;
     using Agilator.Models;
     using AutoMapper;
 
@@ -10,6 +11,8 @@
         {
             CreateMap<UserRegistrationDto, ApplicationUser>()
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
+
+            CreateMap<ProjectDto, Project>();
         }
     }
 }
