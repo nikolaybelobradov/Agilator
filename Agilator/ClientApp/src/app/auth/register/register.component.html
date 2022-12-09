@@ -1,0 +1,36 @@
+<section id="form">
+    <h1>Register</h1>
+    <p>Already have an account? <a routerLink="/auth/login">Login here</a></p>
+    <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+        <div class="box">
+            <p *ngIf="showError">
+                <span [innerHTML]="errorMessage"></span>
+            </p>
+            <h2>User details</h2>
+
+            <div class="input-element">
+                <label>First Name</label>
+                <input formControlName="firstName" type="text" placeholder="John">
+            </div>
+            <div class="input-element">
+                <label>Last Name</label>
+                <input formControlName="lastName" type="text" placeholder="Smith">
+            </div>
+            <div class="input-element">
+                <label>Email</label>
+                <input formControlName="email" type="email" placeholder="j.smith@email.com">
+            </div>
+            <div class="input-element">
+                <label>Password</label>
+                <input formControlName="password" type="password"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            </div>
+            <div class="input-element">
+                <label>Confirm Password</label>
+                <input formControlName="confirmPassword" type="password"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            </div>
+            <button type="submit" class="btn-primary">Register</button>
+        </div>
+    </form>
+</section>
