@@ -79,6 +79,8 @@
         [HttpPut("{id}")]
         public async Task<IActionResult> EditProject(string id, Project model)
         {
+
+
             if (id != model.Id)
             {
                 return BadRequest();

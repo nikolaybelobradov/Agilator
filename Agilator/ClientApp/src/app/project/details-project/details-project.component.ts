@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ProjectService } from '../project.service';
 
@@ -11,9 +11,14 @@ import { ProjectService } from '../project.service';
 export class DetailsProjectComponent implements OnInit {
 
   id: string;
-  project!: IProject;
-  constructor(private route: ActivatedRoute, private projectService: ProjectService) {
+  project: IProject;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, 
+    private projectService: ProjectService) {
     this.id = this.route.snapshot.params['id'];
+    this.project = {id: '', name: '', description: '', sprints: []}
   };
 
   ngOnInit(): void {
@@ -27,14 +32,15 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   edit = (id: string) => {
-    if(confirm("Are you sure to edit ")) {
-      console.log("Implement delete functionality here");
-    }
+    this.router.navigate([`/project/edit/${id}`]);
   }
 
-  delete = (id: string) => {
-    if(confirm("Are you sure to delete ")) {
-      console.log("Implement delete functionality here");
+  delete = (id: string, name: string) => {
+    if(confirm(`Are you sure you want to delete the ${name} project and all sprints and team members in it?`)) {
+      this.projectService.delete('api/project', this.id).subscribe (() => {
+        this.router.navigate(['/projects']);
+      });
     }
+
   }
 }

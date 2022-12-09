@@ -1,1 +1,18 @@
-<p>edit-project works!</p>
+<section id="form">
+    <h1>Edit a project</h1>
+    <form [formGroup]="editProjectForm" (ngSubmit)="edit(editProjectForm.value)">
+    <div class="box">
+        <h2>Project details</h2>
+
+        <div class="input-element">
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" type="text" placeholder="MyProject" value="{{project.name}}">
+        </div>
+        <div class="input-element">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" placeholder="Add your project description here..." rows="6" value="{{project.description}}"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Edit</button>
+    </div>
+    </form>
+</section>

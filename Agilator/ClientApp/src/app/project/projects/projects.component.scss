@@ -25,42 +25,5 @@
     .box-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        justify-content: center;
-        align-items: center;
-        gap: 6.25rem;
-        padding: 2.5rem 15rem;
-
-        .box {
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            border: 0.0625rem solid #eff0f6;
-            border-radius: 2.125rem;
-            box-shadow: 0 0.125rem 0.375rem 0 rgb(19, 18, 66, 0.07);
-            gap: 0.94rem;
-            padding: 3.44rem 2.5rem;
-            color: var(--clr-black);
-            transition: 150ms;
-            width: 18.75rem;
-
-            i {
-                font-size: 1.75rem;
-                color: var(--clr-primary);
-            }
-
-            span {
-                font-size: 1.125rem;
-                line-height: 1.25rem;
-                font-weight: 500;
-            }
-        }
-
-        .box:hover {
-            border: 0.125rem solid var(--clr-primary);
-            cursor: pointer;
-            transform: scale(1.07);
-        }
-
     }
-
 }

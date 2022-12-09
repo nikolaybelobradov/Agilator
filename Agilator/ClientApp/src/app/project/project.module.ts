@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectsComponent } from './projects/projects.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { DetailsProjectComponent } from './details-project/details-project.component';
+import { TeamModule } from './team/team.module';
+import { SprintModule } from './sprint/sprint.module';
 
 
 
@@ -20,7 +22,9 @@ import { DetailsProjectComponent } from './details-project/details-project.compo
     CommonModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TeamModule,
+    SprintModule
   ]
 })
 export class ProjectModule { }

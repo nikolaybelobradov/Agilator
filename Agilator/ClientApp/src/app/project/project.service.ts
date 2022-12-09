@@ -15,9 +15,6 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   getProjectDetails(route: string, id: string){
-
-    var asd = this.getRoute(route, id);
-    
     return this.http.get<IProject> (this.getRoute(route, id));
   }
 
@@ -27,6 +24,14 @@ export class ProjectService {
 
   create(route: string, body: IProjectDto) {
     return this.http.post<IResponseDto> (this.getRoute(route), body);
+  }
+
+  edit(route: string, id: string, body: IProjectDto){
+    return this.http.put (this.getRoute(route, id), body);
+  }
+
+  delete(route: string, id: string){
+    return this.http.delete (this.getRoute(route, id));
   }
 
   private getRoute = (route: string, id?: string) => {
