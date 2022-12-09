@@ -3,7 +3,7 @@
     <p>Not enough? <a routerLink="/project/create"> Create a project </a></p>
     <div class="box-container">
         <div *ngFor="let project of projects;">
-        <div class="box" >
+        <div routerLink="/project/details/{{project.id}}" class="box" >
             <i class="fa-solid fa-list-check"></i>
             <span>{{project.name}}</span>
         </div>

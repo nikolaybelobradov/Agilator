@@ -1,0 +1,242 @@
+<section id="title">
+
+    <div class="capacity-table-header">
+        <h2>{{project.name}}</h2>
+        <div class="icons">
+            <a (click)="edit(project.id)"><i class="fa-solid fa-file-pen"></i></a>
+            <a (click)="delete(project.id)"><i class="fa-solid fa-trash"></i></a>
+        </div>
+    </div>
+    <p> {{project.description}} </p>
+
+
+</section>
+<div class="section-container">
+    <section id="sprints">
+        <h3>Sprints</h3>
+        <ul role="list">
+            <li>
+                <span>Add</span>
+                <i class="fa-solid fa-plus"></i>
+            </li>
+            <li>
+                <span>Sprint 1</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </li>
+            <li class="selected">
+                <span>Sprint 2</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </li>
+            <li>
+                <span>Sprint 3</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </li>
+            <li>
+                <span>Sprint 4</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </li>
+            <li>
+                <span>Sprint 5</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </li>
+            <li>
+                <span>Sprint 6</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </li>
+        </ul>
+    </section>
+
+    <section id="capacity-table">
+        <div class="capacity-table-header">
+            <h3>Sprint 2: Capacity Table</h3>
+            <div class="icons">
+                <a href=""><i class="fa-solid fa-file-pen"></i></a>
+                <a href=""><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
+
+        <div id="table-properties">
+            <ul role="list">
+                <li>
+                    <span>Total capacity: 100 %</span>
+                    <select>
+                        <option>Hours</option>
+                        <option>Days</option>
+                        <option selected>%</option>
+                    </select>
+                </li>
+                <li>
+                    <span>Vacation: 50 days</span>
+                    <select>
+                        <option>Hours</option>
+                        <option selected>Days</option>
+                        <option>%</option>
+                    </select>
+                </li>
+                <li>
+                    <span>Capacity: 80 hours</span>
+                    <select>
+                        <option selected>Hours</option>
+                        <option>Days</option>
+                        <option>%</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Team Member</th>
+                    <th>Total Capacity</th>
+                    <th>Vacation</th>
+                    <th>Capacity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </section>

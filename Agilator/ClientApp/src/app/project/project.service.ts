@@ -14,6 +14,13 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
+  getProjectDetails(route: string, id: string){
+
+    var asd = this.getRoute(route, id);
+    
+    return this.http.get<IProject> (this.getRoute(route, id));
+  }
+
   getMyProjects(route: string){
     return this.http.get<IProject[]> (this.getRoute(route));
   }
@@ -22,7 +29,10 @@ export class ProjectService {
     return this.http.post<IResponseDto> (this.getRoute(route), body);
   }
 
-  private getRoute = (route: string) => {
+  private getRoute = (route: string, id?: string) => {
+
+    if(id !== undefined) return `${environment.baseUrl}/${route}/${id}`;
+
     return `${environment.baseUrl}/${route}`;
   }
 }

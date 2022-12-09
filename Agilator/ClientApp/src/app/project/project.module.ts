@@ -4,13 +4,17 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectsComponent } from './projects/projects.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { DetailsProjectComponent } from './details-project/details-project.component';
 
 
 
 @NgModule({
   declarations: [
     CreateProjectComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    EditProjectComponent,
+    DetailsProjectComponent
   ],
   imports: [
     CommonModule,

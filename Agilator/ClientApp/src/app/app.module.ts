@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ProjectModule } from './project/project.module';
 import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './shared/errors/error-handler.service';
+import { ProjectModule } from './project/project.module';
 
 @NgModule({
   declarations: [
