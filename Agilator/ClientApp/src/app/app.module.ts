@@ -10,6 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './shared/errors/error-handler.service';
 import { ProjectModule } from './project/project.module';
+import { TeamModule } from './project/team/team.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProjectModule } from './project/project.module';
     AuthModule,
     HttpClientModule,
     ProjectModule,
+    TeamModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

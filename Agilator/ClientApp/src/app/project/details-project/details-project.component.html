@@ -11,11 +11,11 @@
 
 <section id="projectOptions">
     <div class="box-container">
-        <div [routerLink]="['/project/{{project.id}}/sprints']" class="box">
+        <div routerLink="/project/sprints/{{project.id}}" class="box">
             <i class="fa-solid fa-rocket"></i>
             <span>Sprints</span>
         </div>
-        <div [routerLink]="['/project/{{project.id}}/team-members']" class="box">
+        <div routerLink="/project/team-members/{{project.id}}" class="box">
             <i class="fa-solid fa-people-group"></i>
             <span>Team Members</span>
         </div>

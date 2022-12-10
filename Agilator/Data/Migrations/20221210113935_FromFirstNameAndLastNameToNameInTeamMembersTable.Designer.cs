@@ -4,14 +4,16 @@ using Agilator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Agilator.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221210113935_FromFirstNameAndLastNameToNameInTeamMembersTable")]
+    partial class FromFirstNameAndLastNameToNameInTeamMembersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,7 +203,6 @@ namespace Agilator.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProjectId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SprintId")
@@ -495,11 +496,9 @@ namespace Agilator.Data.Migrations
 
             modelBuilder.Entity("Agilator.Models.TeamMember", b =>
                 {
-                    b.HasOne("Agilator.Models.Project", "Project")
+                    b.HasOne("Agilator.Models.Project", null)
                         .WithMany("TeamMembers")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Agilator.Models.Sprint", null)
                         .WithMany("TeamMembers")

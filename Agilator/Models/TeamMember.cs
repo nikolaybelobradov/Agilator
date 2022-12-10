@@ -2,6 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class TeamMember : BaseModel
     {
         public TeamMember()
@@ -13,12 +15,16 @@
         public string Id { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public int WorkingHours { get; set; }
+
+        [Required]
+        public string ProjectId { get; set; }
+
+        [ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+
     }
 }

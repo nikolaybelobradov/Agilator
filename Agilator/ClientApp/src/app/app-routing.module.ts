@@ -26,10 +26,10 @@ const routes: Routes = [
   {path: 'project/edit/:id', component: EditProjectComponent, canActivate: [AuthGuard]},
 
   //Team
-  {path: 'project/:id/team-members', component: TeamMembersComponent, canActivate: [AuthGuard]},
+  {path: 'project/team-members/:id', component: TeamMembersComponent, canActivate: [AuthGuard]},
 
   //Sprint
-  {path: 'project/:id/sprints', component: SprintsComponent, canActivate: [AuthGuard]},
+  {path: 'project/sprints/:id', component: SprintsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -9,20 +9,16 @@ import { ProjectService } from '../project.service';
   selector: 'app-create-project',
   templateUrl: './create-project.component.html'
 })
-export class CreateProjectComponent implements OnInit {
+export class CreateProjectComponent {
 
-  createProjectForm!: FormGroup;
+  createProjectForm: FormGroup;
 
-  constructor(private projectService: ProjectService) { };
-
-  ngOnInit(): void {
-
+  constructor(private projectService: ProjectService) {
     this.createProjectForm = new FormGroup({
       name: new FormControl(''),
       description: new FormControl(''),
     })
-
-  }
+  };
 
   public create = (createProjectFormValue: any) => {
     const formValues = { ...createProjectFormValue };
@@ -35,6 +31,7 @@ export class CreateProjectComponent implements OnInit {
     this.projectService.create("api/project/create", project).subscribe({
       next: (response: IResponseDto) => {
         console.log("Successful created project")
+        //TODO REDIRECT
       },
       error: (err: HttpErrorResponse) => console.log(err.error.errors)
     });

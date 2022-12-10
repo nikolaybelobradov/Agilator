@@ -2,6 +2,7 @@
 {
     using Agilator.DataTransfer.Authentication;
     using Agilator.DataTransfer.Project;
+    using Agilator.DataTransfer.TeamMember;
     using Agilator.Models;
     using AutoMapper;
 
@@ -13,6 +14,7 @@
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
 
             CreateMap<ProjectDto, Project>();
+            CreateMap<TeamMemberDto, TeamMember>();
         }
     }
 }

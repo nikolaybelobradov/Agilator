@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ProjectService } from '../project.service';
 
@@ -14,8 +14,8 @@ export class DetailsProjectComponent implements OnInit {
   project: IProject;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private router: Router, 
     private projectService: ProjectService) {
     this.id = this.route.snapshot.params['id'];
     this.project = {id: '', name: '', description: '', sprints: []}
@@ -25,7 +25,7 @@ export class DetailsProjectComponent implements OnInit {
     this.loadProjectDetails();
   }
 
-  loadProjectDetails = () => {
+    loadProjectDetails = () => {
     this.projectService.getProjectDetails('api/project', this.id).subscribe(project => {
       this.project = project;
     });
@@ -36,11 +36,10 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   delete = (id: string, name: string) => {
-    if(confirm(`Are you sure you want to delete the ${name} project and all sprints and team members in it?`)) {
-      this.projectService.delete('api/project', this.id).subscribe (() => {
+    if (confirm(`Are you sure you want to delete the ${name} project and all sprints and team members in it?`)) {
+      this.projectService.delete('api/project', id).subscribe(() => {
         this.router.navigate(['/projects']);
       });
     }
-
   }
 }

@@ -10,8 +10,6 @@ import { IProject } from '../shared/interfaces/IProject';
 })
 export class ProjectService {
 
-  readonly _url = `${environment.baseUrl}/project`
-
   constructor(private http: HttpClient) { }
 
   getProjectDetails(route: string, id: string){

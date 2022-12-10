@@ -16,7 +16,7 @@ import { SprintModule } from './sprint/sprint.module';
     CreateProjectComponent,
     ProjectsComponent,
     EditProjectComponent,
-    DetailsProjectComponent
+    DetailsProjectComponent,
   ],
   imports: [
     CommonModule,
