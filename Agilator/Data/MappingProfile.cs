@@ -13,10 +13,8 @@
             CreateMap<UserRegistrationDto, ApplicationUser>()
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
 
-            CreateMap<ProjectDto, Project>();
+            CreateMap<CreateProjectDto, Project>();
             CreateMap<CreateTeamMemberDto, TeamMember>();
-            CreateMap<EditTeamMemberDto, TeamMember>();
-
         }
     }
 }

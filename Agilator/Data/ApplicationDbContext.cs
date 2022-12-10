@@ -68,6 +68,8 @@
                 method.Invoke(null, new object[] { builder });
             }
 
+
+
             // Disable cascade delete
             var foreignKeys = entityTypes
                 .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
@@ -75,10 +77,24 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.Entity<Project>()
+                .HasMany(p => p.TeamMembers)
+                .WithOne(t => t.Project)
+                .HasForeignKey(p => p.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Project>()
+                .HasMany(p => p.Sprints)
+                .WithOne(t => t.Project)
+                .HasForeignKey(p => p.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         private void ConfigureUserIdentityRelations(ModelBuilder builder)
-            => builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        {
+            builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
         where T : class, IDeletableEntity

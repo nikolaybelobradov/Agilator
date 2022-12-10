@@ -40,7 +40,7 @@
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<Project>> Create([FromBody]ProjectDto model)
+        public async Task<ActionResult<Project>> Create([FromBody]CreateProjectDto model)
         {
             if (model == null || !ModelState.IsValid)
                 return BadRequest();
@@ -77,18 +77,20 @@
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditProject(string id, Project model)
+        public async Task<IActionResult> EditProject(string id, [FromBody] EditProjectDto model)
         {
+            if (model == null || !ModelState.IsValid || id != model.Id) return BadRequest();
+            
+            var project = await _repository.SelectById<Project>(model.Id);
 
+            if (project == null) return NotFound();
 
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
+            project.Name = model.Name;
+            project.Description = model.Description;
 
             try
             {
-                await _repository.UpdateAsync(model);
+                await _repository.UpdateAsync(project);
             }
             catch (Exception e)
             {
