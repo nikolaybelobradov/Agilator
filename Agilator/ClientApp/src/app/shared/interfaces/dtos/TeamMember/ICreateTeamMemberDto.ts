@@ -1,4 +1,4 @@
-export interface ITeamMemberDto{
+export interface ICreateTeamMemberDto{
 
     name: string;
     workingHours: number;

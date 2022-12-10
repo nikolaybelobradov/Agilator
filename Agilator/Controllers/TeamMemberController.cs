@@ -35,7 +35,7 @@ namespace Agilator.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult<TeamMember>> Add([FromBody] TeamMemberDto model)
+        public async Task<ActionResult<TeamMember>> Add([FromBody] CreateTeamMemberDto model)
         {
             if (model == null || !ModelState.IsValid) return BadRequest();
 
@@ -53,6 +53,33 @@ namespace Agilator.Controllers
 
             return Ok(new ResponseDto { IsSuccessful = true });
         }
+
+        [HttpPut()]
+        public async Task<IActionResult> EditTeamMember([FromBody] EditTeamMemberDto model)
+        {
+
+            if (model == null || !ModelState.IsValid || model.Id == null) return BadRequest();
+
+            var teamMember = await _repository.SelectById<TeamMember>(model.Id);
+
+            if (teamMember == null) return NotFound();
+
+            teamMember.Name = model.Name;
+            teamMember.WorkingHours = model.WorkingHours;
+
+            try
+            {
+                await _repository.UpdateAsync(teamMember);
+            }
+            catch (Exception e)
+            {
+                var errorMessages = new HashSet<string> { e.ToString() };
+                return BadRequest(new ResponseDto { Errors = errorMessages });
+            }
+
+            return Ok(new ResponseDto { IsSuccessful = true });
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<TeamMember>> DeleteTeamMember(string id)

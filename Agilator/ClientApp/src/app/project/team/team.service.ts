@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IResponseDto } from 'src/app/shared/interfaces/dtos/IResponseDto';
-import { ITeamMemberDto } from 'src/app/shared/interfaces/dtos/ITeamMemberDto';
+import { ICreateTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/ICreateTeamMemberDto';
+import { IEditTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/IEditTeamMemberDto';
 import { ITeamMember } from 'src/app/shared/ITeamMember';
 import { environment } from 'src/environments/environment';
 
@@ -16,12 +17,12 @@ export class TeamService {
     return this.http.get<ITeamMember[]> (this.getRoute(route, id));
   }
 
-  create(route: string, body: ITeamMemberDto) {
+  create(route: string, body: ICreateTeamMemberDto) {
     return this.http.post<IResponseDto> (this.getRoute(route), body);
   }
 
-  edit(route: string, id: string, body: ITeamMemberDto){
-    return this.http.put (this.getRoute(route, id), body);
+  edit(route: string, body: IEditTeamMemberDto){
+    return this.http.put (this.getRoute(route), body);
   }
 
   delete(route: string, id: string){

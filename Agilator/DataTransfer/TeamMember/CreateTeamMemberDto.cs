@@ -1,7 +1,7 @@
 ﻿namespace Agilator.DataTransfer.TeamMember
 {
     using System.ComponentModel.DataAnnotations;
-    public class TeamMemberDto
+    public class CreateTeamMemberDto
     {
         [Required]
         public string Name { get; set; }

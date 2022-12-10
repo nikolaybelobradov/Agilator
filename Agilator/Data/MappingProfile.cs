@@ -14,7 +14,9 @@
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
 
             CreateMap<ProjectDto, Project>();
-            CreateMap<TeamMemberDto, TeamMember>();
+            CreateMap<CreateTeamMemberDto, TeamMember>();
+            CreateMap<EditTeamMemberDto, TeamMember>();
+
         }
     }
 }

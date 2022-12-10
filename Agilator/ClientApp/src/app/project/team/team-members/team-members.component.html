@@ -17,8 +17,9 @@
                 <button (click)="showHidePanel('add', 'show')"><i class="fa-solid fa-user-plus plus-icon"></i></button>
             </div>
         </div>
-        <form [formGroup]="addTeamMemberForm" (ngSubmit)="add(addTeamMemberForm.value)">
-            <div *ngIf="isAddPanelVisible" class="table-properties">
+        <div *ngIf="isAddPanelVisible" class="table-properties">
+            <form [formGroup]="addTeamMemberForm" (ngSubmit)="add(addTeamMemberForm.value)">
+
                 <h4>Add Team Member</h4>
                 <ul role="list">
                     <li>
@@ -47,8 +48,43 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-        </form>
+            </form>
+        </div>
+
+
+        <div *ngIf="isEditPanelVisible" class="table-properties">
+            <form [formGroup]="editTeamMemberForm" (ngSubmit)="edit(editTeamMemberForm.value)">
+                <h4>Edit Team Member</h4>
+                <ul role="list">
+                    <li>
+                        <label for="name">Name</label>
+                        <input id="name" type="text" formControlName="name" placeholder="John Smith" required>
+                    </li>
+                    <li>
+                        <label for="workingHours">Working Hours</label>
+                        <select id="workingHours" formControlName="workingHours" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>Options</span>
+                        <div class="icons">
+                            <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
+                            <button (click)="showHidePanel('edit', 'hide')"><i
+                                    class="fa-solid fa-circle-xmark"></i></button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
 
         <table *ngIf="teamMembers.length >= 1">
             <thead>
@@ -66,8 +102,10 @@
                     <td>{{teamMember.name}}</td>
                     <td>{{teamMember.workingHours}} h</td>
                     <td class="icons">
-                        <a href=""><i class="fa-solid fa-file-pen"></i></a>
-                        <button (click)="delete(teamMember.id, teamMember.name)">
+                        <button (click)="showHidePanel('edit', 'show', teamMember)">
+                            <i class="fa-solid fa-file-pen"></i>
+                        </button>
+                        <button (click)="delete(teamMember)">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>
