@@ -61,7 +61,7 @@ body {
 
 #nav {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
 
     li a {
         color: var(--clr-black);
@@ -206,7 +206,7 @@ body {
 
 .icons {
 
-    button{
+    button {
         background: none;
         border: 0;
     }
@@ -255,43 +255,41 @@ body {
     box-shadow: 0.3125rem 0 1rem 0 rgb(8, 15, 52, 0.06);
 
     ul {
-        margin-top: 2.187rem;
         display: flex;
         justify-content: space-between;
 
         li {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 0.3125rem;
             justify-content: center;
             align-items: center;
 
             select,
-            input {
+            input
+            {
 
-                border: 0.0625rem solid #eff0f6;
-                border-radius: 2.875rem;
-                box-shadow: 0.125rem 0 0.375rem 0 rgb(19, 18, 66, 0.07);
-                /* padding: 2px 10px; */
-                color: var(--clr-dark-gray);
-                font-size: 1rem;
-                line-height: 1.25rem;
-                /* max-width: 100px; */
+            border: 0.0625rem solid #eff0f6;
+            border-radius: 2.875rem;
+            box-shadow: 0.125rem 0 0.375rem 0 rgb(19, 18, 66, 0.07);
+            color: var(--clr-dark-gray);
+            font-size: 1rem;
+            line-height: 1.25rem;
             }
 
-            select:focus,
-            select:hover,
-            input {
-                border: 0.0625rem solid var(--clr-light-gray);
-                outline: none;
-                cursor: pointer;
-            }
+        select:focus,
+        select:hover,
+        input {
+            border: 0.0625rem solid var(--clr-light-gray);
+            outline: none;
+            cursor: pointer;
+        }
 
-            .icons {
-                font-size: 1.4375rem;
-            }
+        .icons {
+            font-size: 1.4375rem;
         }
     }
+}
 }
 
 table {
@@ -336,7 +334,7 @@ table {
 
     th,
     td {
-        padding: 12px 15px;
+        padding: 0.75rem 0.9375rem;
         margin: 0;
         text-align: center;
     }
@@ -396,9 +394,9 @@ table {
 .section-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     text-align: center;
     margin: 6.25rem 0;
+    gap: 12.5rem;
 }
 
 .empty-table {
@@ -417,8 +415,8 @@ table {
         font-size: 1.125rem;
         line-height: 1.875rem;
     }
-    
-    button{
+
+    button {
         background: none;
         border: 0;
 
@@ -428,7 +426,7 @@ table {
             cursor: pointer;
             transition: 150ms;
         }
-    
+
         i:hover {
             transform: scale(1.2);
         }

@@ -1,7 +1,7 @@
 import { Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { IProject } from 'src/app/shared/interfaces/IProject';
-import { ProjectService } from '../project.service';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
   selector: 'app-title',

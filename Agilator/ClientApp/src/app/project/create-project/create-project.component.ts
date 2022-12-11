@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IProjectDto } from 'src/app/shared/interfaces/dtos/IProjectDto';
 import { IResponseDto } from 'src/app/shared/interfaces/dtos/IResponseDto';
-import { ProjectService } from '../project.service';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
   selector: 'app-create-project',

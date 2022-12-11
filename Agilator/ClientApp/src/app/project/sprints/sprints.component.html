@@ -1,1 +1,139 @@
-<p>sprints works!</p>
+<app-title [project]="project"></app-title>
+
+<div class="section-container">
+    <section id="sprints">
+        <h3>Sprints</h3>
+
+        <div id="add-sprint">
+            <ul role="list">
+                <li>
+                    <h4>Add Sprint</h4>
+                    <button type="submit"><i class="fa-solid fa-circle-xmark"></i></button>
+                </li>
+                <li>
+                    <input type="text" placeholder="Sprint name">
+                </li>
+                <li>
+                    <select>
+                        <option selected disabled>Duration</option>
+                        <option>1 week</option>
+                        <option>2 weeks</option>
+                        <option>3 weeks</option>
+                        <option>4 weeks</option>
+                    </select>
+                    <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
+
+
+                </li>
+            </ul>
+        </div>
+        <div id="sprints-list">
+            <ul role="list">
+                <li>
+                    <span>Add</span>
+                    <i class="fa-solid fa-plus"></i>
+                </li>
+                <li>
+                    <span>Sprint 1</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+                <li class="selected">
+                    <span>Sprint 2</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+                <li>
+                    <span>Sprint 3</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+                <li>
+                    <span>Sprint 4</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+                <li>
+                    <span>Sprint 5</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+                <li>
+                    <span>Sprint 6</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="capacity-table">
+        <div class="table-header">
+            <h3>Sprint 2: Capacity Table</h3>
+            <div class="icons">
+                <a href=""><i class="fa-solid fa-file-pen"></i></a>
+                <a href=""><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
+
+        <div class="table-properties">
+            <ul role="list">
+                <li>
+                    <span>Total capacity: 100 %</span>
+                    <select>
+                        <option>Hours</option>
+                        <option>Days</option>
+                        <option selected>%</option>
+                    </select>
+                </li>
+                <li>
+                    <span>Vacation: 50 days</span>
+                    <select>
+                        <option>Hours</option>
+                        <option selected>Days</option>
+                        <option>%</option>
+                    </select>
+                </li>
+                <li>
+                    <span>Capacity: 80 hours</span>
+                    <select>
+                        <option selected>Hours</option>
+                        <option>Days</option>
+                        <option>%</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Team Member</th>
+                    <th>Total Capacity</th>
+                    <th>Vacation</th>
+                    <th>Capacity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Smith</td>
+                    <td>80 h</td>
+                    <td>
+                        <input type="number" value="0">
+                        days
+                    </td>
+                    <td>64 h</td>
+                </tr>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>№</th>
+                    <th>Team Member</th>
+                    <th>Total Capacity</th>
+                    <th>Vacation</th>
+                    <th>Capacity</th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+
+
+    </section>
+</div>

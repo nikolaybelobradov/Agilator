@@ -1,4 +1,4 @@
-import { ITeamMember } from "../ITeamMember";
+import { ITeamMember } from "./ITeamMember";
 import { ISprint } from "./ISprint";
 
 export interface IVacation{

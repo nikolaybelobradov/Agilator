@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAuthResponseDto } from 'src/app/shared/interfaces/dtos/IAuthResponseDto';
 import { IUserLoginDto } from 'src/app/shared/interfaces/dtos/IUserLoginDto';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',

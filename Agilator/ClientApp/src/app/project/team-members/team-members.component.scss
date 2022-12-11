@@ -1,12 +1,21 @@
-#team-members-table .table-properties{
-    padding: 1.875rem 2.1875rem;
-    margin-bottom: 4.375rem;
-}
+#team-members-table{
+    .table-properties{
+        padding: 1.875rem 2.1875rem;
+        margin-bottom: 4.375rem;
 
-#team-members-table .table-properties ul li input{
-    width: 18.75rem;
-}
+        ul{
+            margin-top: 1.875rem;
 
-#team-members-table .table-properties ul li select, input{
-    padding: 0.5rem 0.9375rem;
+            li{
+
+                input{
+                    width: 18.75rem;
+                }
+
+                select, input{
+                    padding: 0.5rem 0.9375rem;
+                }
+            }
+        }
+    }
 }

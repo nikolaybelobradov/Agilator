@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProjectDto } from 'src/app/shared/interfaces/dtos/IProjectDto';
 import { IProject } from 'src/app/shared/interfaces/IProject';
-import { ProjectService } from '../project.service';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
   selector: 'app-edit-project',

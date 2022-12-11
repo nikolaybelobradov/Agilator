@@ -6,9 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ICreateTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/ICreateTeamMemberDto';
 import { IEditTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/IEditTeamMemberDto';
 import { IProject } from 'src/app/shared/interfaces/IProject';
-import { ITeamMember } from 'src/app/shared/ITeamMember';
+import { ITeamMember } from 'src/app/shared/interfaces/ITeamMember';
+import { ProjectService } from 'src/app/shared/services/project.service';
 import { TeamService } from 'src/app/shared/services/team.service';
-import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-team-members',
