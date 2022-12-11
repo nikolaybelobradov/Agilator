@@ -4,57 +4,63 @@
     <section id="sprints">
         <h3>Sprints</h3>
 
-        <div id="add-sprint">
-            <ul role="list">
-                <li>
-                    <h4>Add Sprint</h4>
-                    <button type="submit"><i class="fa-solid fa-circle-xmark"></i></button>
-                </li>
-                <li>
-                    <input type="text" placeholder="Sprint name">
-                </li>
-                <li>
-                    <select>
-                        <option selected disabled>Duration</option>
-                        <option>1 week</option>
-                        <option>2 weeks</option>
-                        <option>3 weeks</option>
-                        <option>4 weeks</option>
-                    </select>
-                    <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
-
-
-                </li>
-            </ul>
+        <div *ngIf="isAddPanelVisible" id="add-sprint">
+            <form [formGroup]="addSprintForm" (ngSubmit)="add(addSprintForm.value)">
+                <ul role="list">
+                    <li>
+                        <h4>Add Sprint</h4>
+                        <button (click)="showHidePanel('add', 'hide')"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </li>
+                    <li>
+                        <input type="text" formControlName="name" placeholder="Sprint name" required>
+                    </li>
+                    <li>
+                        <select formControlName="duration" required>
+                            <option value="1">1 week</option>
+                            <option value="2">2 weeks</option>
+                            <option value="3">3 weeks</option>
+                            <option value="4">4 weeks</option>
+                        </select>
+                        <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
+                    </li>
+                </ul>
+            </form>
         </div>
+
+        <div *ngIf="isEditPanelVisible" id="add-sprint">
+            <form [formGroup]="editSprintForm" (ngSubmit)="edit(editSprintForm.value)">
+                <ul role="list">
+                    <li>
+                        <h4>Edit Sprint</h4>
+                        <button (click)="showHidePanel('edit', 'hide')"><i
+                                class="fa-solid fa-circle-xmark"></i></button>
+                    </li>
+                    <li>
+                        <input type="text" formControlName="name" placeholder="Sprint name" required>
+                    </li>
+                    <li>
+                        <select formControlName="duration" required>
+                            <option value="1">1 week</option>
+                            <option value="2">2 weeks</option>
+                            <option value="3">3 weeks</option>
+                            <option value="4">4 weeks</option>
+                        </select>
+                        <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+
         <div id="sprints-list">
             <ul role="list">
-                <li>
+                <li (click)="showHidePanel('add', 'show')">
                     <span>Add</span>
                     <i class="fa-solid fa-plus"></i>
                 </li>
-                <li>
-                    <span>Sprint 1</span>
-                    <i class="fa-solid fa-angle-right"></i>
-                </li>
-                <li class="selected">
-                    <span>Sprint 2</span>
-                    <i class="fa-solid fa-angle-right"></i>
-                </li>
-                <li>
-                    <span>Sprint 3</span>
-                    <i class="fa-solid fa-angle-right"></i>
-                </li>
-                <li>
-                    <span>Sprint 4</span>
-                    <i class="fa-solid fa-angle-right"></i>
-                </li>
-                <li>
-                    <span>Sprint 5</span>
-                    <i class="fa-solid fa-angle-right"></i>
-                </li>
-                <li>
-                    <span>Sprint 6</span>
+                <li *ngFor="let sprint of sprints;" (click)="selectSprint(sprint.id)"
+                    [ngClass]="{'selected': sprint.id === selectedSprint.id}">
+                    <span>{{sprint.name}}</span>
                     <i class="fa-solid fa-angle-right"></i>
                 </li>
             </ul>
@@ -62,15 +68,19 @@
     </section>
 
     <section id="capacity-table">
-        <div class="table-header">
-            <h3>Sprint 2: Capacity Table</h3>
+        <div *ngIf="selectedSprint.id !== ''" class="table-header">
+            <h3>{{selectedSprint.name}}: Capacity Table</h3>
             <div class="icons">
-                <a href=""><i class="fa-solid fa-file-pen"></i></a>
-                <a href=""><i class="fa-solid fa-trash"></i></a>
+                <button (click)="showHidePanel('edit', 'show', selectedSprint)">
+                    <i class="fa-solid fa-file-pen"></i>
+                </button>
+                <button (click)="delete(selectedSprint)">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             </div>
         </div>
 
-        <div class="table-properties">
+        <div *ngIf="selectedSprint.id !== ''" class="table-properties">
             <ul role="list">
                 <li>
                     <span>Total capacity: 100 %</span>
@@ -98,7 +108,7 @@
                 </li>
             </ul>
         </div>
-        <table>
+        <table *ngIf="selectedSprint.id !== ''">
             <thead>
                 <tr>
                     <th>№</th>
@@ -133,7 +143,10 @@
 
         </table>
 
-
+        <div class="empty-table" *ngIf="selectedSprint.id === ''">
+            <i class="fa-solid fa-hand-pointer"></i>
+            <p>No sprint selected.</p>
+        </div>
 
     </section>
 </div>

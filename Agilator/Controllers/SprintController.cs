@@ -34,6 +34,16 @@ namespace Agilator.Controllers
             return sprints;
         }
 
+        [HttpGet("getSprint/{id}")]
+        public async Task<ActionResult<Sprint>> GetSprint(string id)
+        {
+            var model = await _repository.SelectById<Sprint>(id);
+
+            if (model == null) return NotFound();
+
+            return model;
+        }
+
         [HttpPost("add")]
         public async Task<ActionResult<Sprint>> Add([FromBody] CreateSprintDto model)
         {

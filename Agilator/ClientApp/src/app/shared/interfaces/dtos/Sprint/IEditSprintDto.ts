@@ -1,4 +1,4 @@
-export interface ISprint{
+export interface IEditSprintDto{
 
     id: string;
     name: string;

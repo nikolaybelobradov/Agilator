@@ -98,7 +98,6 @@ export class TeamMembersComponent implements OnInit {
 
     this.teamService.create("api/teamMember/add", teamMember).subscribe({
       next: () => {
-        console.log("Successful created project");
         this.loadTeamMembers();
         this.addTeamMemberForm.reset({
           name: '',

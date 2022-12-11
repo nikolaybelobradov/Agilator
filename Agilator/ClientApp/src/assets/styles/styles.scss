@@ -418,18 +418,18 @@ table {
 
     button {
         background: none;
-        border: 0;
+        border: 0;        
+    }
 
-        i {
-            font-size: 5rem;
-            color: var(--clr-primary);
-            cursor: pointer;
-            transition: 150ms;
-        }
+    i {
+        font-size: 5rem;
+        color: var(--clr-primary);
+        cursor: pointer;
+        transition: 150ms;
+    }
 
-        i:hover {
-            transform: scale(1.2);
-        }
+    i:hover {
+        transform: scale(1.2);
     }
 
 
