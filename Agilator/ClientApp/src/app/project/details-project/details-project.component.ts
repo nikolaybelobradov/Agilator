@@ -14,7 +14,6 @@ export class DetailsProjectComponent implements OnInit {
   project: IProject;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService) {
     this.id = this.route.snapshot.params['id'];
@@ -25,21 +24,9 @@ export class DetailsProjectComponent implements OnInit {
     this.loadProjectDetails();
   }
 
-    loadProjectDetails = () => {
+  loadProjectDetails = () => {
     this.projectService.getProjectDetails('api/project', this.id).subscribe(project => {
       this.project = project;
     });
-  }
-
-  edit = (id: string) => {
-    this.router.navigate([`/project/edit/${id}`]);
-  }
-
-  delete = (id: string, name: string) => {
-    if (confirm(`Are you sure you want to delete the ${name} project and all sprints and team members in it?`)) {
-      this.projectService.delete('api/project', id).subscribe(() => {
-        this.router.navigate(['/projects']);
-      });
-    }
   }
 }

@@ -49,27 +49,7 @@
     align-items: center;
 }
 
-.icons {
 
-    a {
-        padding: 0 2px;
-        color: var(--clr-primary);
-        cursor: pointer;
-
-        i {
-            transition: 150ms;
-        }
-
-        i:hover {
-            transform: scale(1.15);
-        }
-    }
-
-    a:last-child {
-        color: var(--clr-dark-gray);
-    }
-
-}
 
 // #sprints {
 

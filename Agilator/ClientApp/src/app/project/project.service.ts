@@ -32,6 +32,17 @@ export class ProjectService {
     return this.http.delete (this.getRoute(route, id));
   }
 
+  loadProjectDetails = (id: string): IProject => {
+
+    let project: IProject = {id: '', name: '', description: '', sprints: []};
+
+    this.getProjectDetails('api/project', id).subscribe(p => {
+      project = p;
+    });
+
+    return project;
+  }
+
   private getRoute = (route: string, id?: string) => {
 
     if(id !== undefined) return `${environment.baseUrl}/${route}/${id}`;

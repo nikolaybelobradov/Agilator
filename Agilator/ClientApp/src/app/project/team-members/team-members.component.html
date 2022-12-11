@@ -1,13 +1,4 @@
-<section id="title">
-    <div class="table-header">
-        <h2>{{project.name}}</h2>
-        <div class="icons">
-            <a><i class="fa-solid fa-file-pen"></i></a>
-            <a><i class="fa-solid fa-trash"></i></a>
-        </div>
-    </div>
-    <p> {{project.description}} </p>
-</section>
+<app-title [project]="project"></app-title>
 
 <div class="section-container">
     <section id="team-members-table">

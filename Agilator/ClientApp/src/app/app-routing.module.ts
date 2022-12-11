@@ -7,8 +7,8 @@ import { CreateProjectComponent } from './project/create-project/create-project.
 import { DetailsProjectComponent } from './project/details-project/details-project.component';
 import { EditProjectComponent } from './project/edit-project/edit-project.component';
 import { ProjectsComponent } from './project/projects/projects.component';
-import { SprintsComponent } from './project/sprint/sprints/sprints.component';
-import { TeamMembersComponent } from './project/team/team-members/team-members.component';
+import { SprintsComponent } from './project/sprints/sprints.component';
+import { TeamMembersComponent } from './project/team-members/team-members.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [

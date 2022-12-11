@@ -7,8 +7,8 @@ import { ICreateTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/
 import { IEditTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/IEditTeamMemberDto';
 import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ITeamMember } from 'src/app/shared/ITeamMember';
-import { ProjectService } from '../../project.service';
-import { TeamService } from '../team.service';
+import { TeamService } from 'src/app/shared/services/team.service';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-team-members',
