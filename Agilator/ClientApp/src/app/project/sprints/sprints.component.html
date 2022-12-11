@@ -84,10 +84,10 @@
             <ul role="list">
                 <li>
                     <span>Total capacity: 100 %</span>
-                    <select>
-                        <option>Hours</option>
-                        <option>Days</option>
-                        <option selected>%</option>
+                    <select #totalCapcityUnitSelect (change)="onChangeTotalCapacityUnit(totalCapcityUnitSelect.value)">
+                        <option value="hours" selected>Hours</option>
+                        <option value="days">Days</option>
+                        <option value="%">%</option>
                     </select>
                 </li>
                 <li>
@@ -119,12 +119,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>John Smith</td>
-                    <td>80 h</td>
+                <tr *ngFor="let teamMember of teamMembers; let i = index;">
+                    <td>{{i + 1}}</td>
+                    <td>{{teamMember.name}}</td>
+                    <td>{{calcTotalCapacity(selectedSprint, teamMember)}}</td>
                     <td>
-                        <input type="number" value="0">
+                        <input type="number" value="0" #vacationDaysInput (change)="onChangeVacation(vacationDaysInput.value)">
                         days
                     </td>
                     <td>64 h</td>

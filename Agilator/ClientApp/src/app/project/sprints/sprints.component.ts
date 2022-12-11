@@ -6,8 +6,10 @@ import { ICreateSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/ICreateS
 import { IEditSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/IEditSprintDto';
 import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ISprint } from 'src/app/shared/interfaces/ISprint';
+import { ITeamMember } from 'src/app/shared/interfaces/ITeamMember';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { SprintService } from 'src/app/shared/services/sprint.service';
+import { TeamService } from 'src/app/shared/services/team.service';
 
 @Component({
   selector: 'app-sprints',
@@ -21,20 +23,26 @@ export class SprintsComponent implements OnInit{
   projectId: string = '';
   project: IProject;
   sprints: ISprint[];
+  teamMembers: ITeamMember[];
   isAddPanelVisible: boolean = false;
   isEditPanelVisible: boolean = false;
   addSprintForm: FormGroup;
   editSprintForm: FormGroup;
 
+  totalCapacityUnit: string = 'hours';
+  capacityUnit: string = 'hours';
+
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
+    private teamService: TeamService,
     private sprintService: SprintService) {
 
     this.projectId = this.route.snapshot.params['id'];
     this.selectedSprint = { id: '', name: '', duration: 0};
     this.project = { id: '', name: '', description: '', sprints: [] };
     this.sprints = [];
+    this.teamMembers = [];
 
     this.addSprintForm = new FormGroup({
       name: new FormControl(''),
@@ -64,10 +72,66 @@ export class SprintsComponent implements OnInit{
     });
   }
 
+  loadTeamMembers = () => {
+    this.teamService.getTeamMembers('api/teamMember', this.projectId).subscribe(teamMembers => {
+      this.teamMembers = teamMembers;
+    });
+  }
+
   selectSprint = (id: string) => {
     this.sprintService.getSprint('api/sprint/getSprint', id).subscribe(sprint => {
       this.selectedSprint = sprint;
     });
+
+    this.loadTeamMembers();
+  }
+
+  onChangeVacation = (days: string) => {
+    console.log("DAYS ", days);
+  }
+
+  onChangeTotalCapacityUnit = (unit: string) => {
+    this.totalCapacityUnit = unit;
+  }
+
+  transformHoursToDays = (hours: number): string => {
+    
+    let _days = Math.floor(hours / 8);
+    let _hours = hours % 8;
+
+    if(hours === 0) return `${_days} d`
+
+    return `${_days} d ${_hours} h`
+  }
+
+  transformHoursToPercentages = (hours: number, sprintDays: number): string => {
+
+    let result: number = Math.round((hours / (sprintDays * 8)) * 100);
+    return `${result} %`;
+  }
+
+  calcTotalCapacity = (sprint: ISprint, teamMember: ITeamMember): string => {
+
+    let sprintDays = this.transformSprintDurationInDays(sprint.duration);
+    let workingHours = teamMember.workingHours;
+    let totalCapacityHours = sprintDays * workingHours;
+
+    if(this.totalCapacityUnit === 'days')
+      return this.transformHoursToDays(totalCapacityHours);
+
+    if(this.totalCapacityUnit === '%')
+      return this.transformHoursToPercentages(totalCapacityHours, sprintDays);
+
+    return `${totalCapacityHours} h`;
+  }
+
+  transformSprintDurationInDays = (duration: number): number => {
+
+    if(duration === 1) return 5;
+    if(duration === 2) return 10;
+    if(duration === 3) return 15;
+
+    return 20;
   }
 
   showHidePanel(panel: string, action: string, sprint?: ISprint) {
