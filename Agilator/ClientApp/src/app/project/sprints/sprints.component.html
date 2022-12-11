@@ -100,10 +100,10 @@
                 </li>
                 <li>
                     <span>Capacity: 80 hours</span>
-                    <select>
-                        <option selected>Hours</option>
-                        <option>Days</option>
-                        <option>%</option>
+                    <select #capcityUnitSelect (change)="onChangeCapacityUnit(capcityUnitSelect.value)">
+                        <option value="hours" selected>Hours</option>
+                        <option value="days">Days</option>
+                        <option value="%">%</option>
                     </select>
                 </li>
             </ul>
@@ -124,10 +124,13 @@
                     <td>{{teamMember.name}}</td>
                     <td>{{calcTotalCapacity(selectedSprint, teamMember)}}</td>
                     <td>
-                        <input type="number" value="0" #vacationDaysInput (change)="onChangeVacation(vacationDaysInput.value)">
+                        <input type="number" min="0" max="{{transformSprintDurationInDays(selectedSprint.duration)}}"
+                            value="{{loadTeamMemberVacation(selectedSprint, teamMember)}}" #vacationDaysInput>
+                        <i (click)="updateVacation(selectedSprint, teamMember, vacationDaysInput.value)" class="fa-solid fa-circle-check"></i>
+
                         days
                     </td>
-                    <td>64 h</td>
+                    <td>{{calcCapacity(selectedSprint, teamMember, loadTeamMemberVacation(selectedSprint, teamMember))}}</td>
                 </tr>
 
             </tbody>

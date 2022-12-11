@@ -5,6 +5,6 @@ export interface IVacation{
 
     id: string;
     duration: number;
-    teamMember: ITeamMember;
-    sprint: ISprint;
+    teamMemberId: string;
+    sprintId: string;
 }
