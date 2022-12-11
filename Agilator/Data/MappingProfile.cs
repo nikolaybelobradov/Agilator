@@ -2,6 +2,7 @@
 {
     using Agilator.DataTransfer.Authentication;
     using Agilator.DataTransfer.Project;
+    using Agilator.DataTransfer.Sprint;
     using Agilator.DataTransfer.TeamMember;
     using Agilator.Models;
     using AutoMapper;
@@ -15,6 +16,7 @@
 
             CreateMap<CreateProjectDto, Project>();
             CreateMap<CreateTeamMemberDto, TeamMember>();
+            CreateMap<CreateSprintDto, Sprint>();
         }
     }
 }
