@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './shared/errors/error-handler.service';
 import { ProjectModule } from './project/project.module';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
     AuthModule,
     HttpClientModule,
     ProjectModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
