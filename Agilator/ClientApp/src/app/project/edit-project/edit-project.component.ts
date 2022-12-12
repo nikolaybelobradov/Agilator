@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,8 +16,6 @@ export class EditProjectComponent implements OnInit {
 
   id: string;
   project: IProject;
-  errorMessage: string = '';
-  showError!: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,9 +60,8 @@ export class EditProjectComponent implements OnInit {
         this.toastr.warning('Successful edited project.', 'Message', { timeOut: 2500 });
         this.router.navigate([`/project/details/${this.id}`]);
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.message;
-        this.showError = true;
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
 

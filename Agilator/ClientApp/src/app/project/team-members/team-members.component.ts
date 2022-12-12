@@ -1,5 +1,4 @@
 
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -106,6 +105,9 @@ export class TeamMembersComponent implements OnInit {
           workingHours: 8,
         });
         this.toastr.success('Successful added team member.', 'Message', { timeOut: 2500 });
+      },
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
 
@@ -126,7 +128,9 @@ export class TeamMembersComponent implements OnInit {
         this.isEditPanelVisible = false;
         this.toastr.warning('Successful edited team member.', 'Message', { timeOut: 2500 });
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
+      }
     });
   }
 

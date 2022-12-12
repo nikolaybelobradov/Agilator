@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,8 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateProjectComponent {
 
   createProjectForm: FormGroup;
-  errorMessage: string = '';
-  showError!: boolean;
 
   constructor(
     private projectService: ProjectService, 
@@ -39,9 +36,8 @@ export class CreateProjectComponent {
         this.toastr.success('Successful created project.', 'Message', { timeOut: 2500 });
         this.router.navigate([`/projects`]);
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.message;
-        this.showError = true;
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
 
