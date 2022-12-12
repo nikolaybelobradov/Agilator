@@ -88,6 +88,14 @@ namespace Agilator.Controllers
 
             if (model == null) return NotFound();
 
+            var vacations = await _repository.SelectAll<Vacation>();
+            var currentVacations = vacations.Where(v => v.TeamMemberId == model.Id);
+
+            foreach (var vacation in currentVacations)
+            {
+                await _repository.DeleteAsync(vacation);
+            }          
+
             await _repository.DeleteAsync(model);
 
             return model;

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICreateSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/ICreateSprintDto';
 import { IEditSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/IEditSprintDto';
 import { IVacationDto } from 'src/app/shared/interfaces/dtos/Vacation/IVacationDto';
@@ -40,6 +40,7 @@ export class SprintsComponent implements OnInit {
   capacities: {[key: string]:string};
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private teamService: TeamService,
@@ -264,6 +265,7 @@ export class SprintsComponent implements OnInit {
 
       this.sprintService.delete('api/sprint', sprint.id).subscribe(() => {
         this.loadSprints();
+        this.selectedSprint = { id: '', name: '', duration: 0 };
       });
     }
   }

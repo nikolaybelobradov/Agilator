@@ -29,7 +29,7 @@ namespace Agilator.Controllers
         public async Task<ActionResult<IEnumerable<Sprint>>> All(string id)
         {
             var sprints = await _repository.SelectAll<Sprint>();
-            sprints = sprints.Where(s => s.ProjectId == id).OrderByDescending(s => s.CreatedOn).ToList();
+            sprints = sprints.Where(s => s.ProjectId == id).OrderBy(s => s.CreatedOn).ToList();
 
             return sprints;
         }
@@ -97,6 +97,14 @@ namespace Agilator.Controllers
             var model = await _repository.SelectById<Sprint>(id);
 
             if (model == null) return NotFound();
+
+            var vacations = await _repository.SelectAll<Vacation>();
+            var currentVacations = vacations.Where(v => v.SprintId == model.Id);
+
+            foreach (var vacation in currentVacations)
+            {
+                await _repository.DeleteAsync(vacation);
+            }
 
             await _repository.DeleteAsync(model);
 

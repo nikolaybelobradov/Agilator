@@ -1,6 +1,7 @@
 ﻿namespace Agilator.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,7 @@
         public Sprint()
         {
             Id = Guid.NewGuid().ToString();
+            Vacations = new HashSet<Vacation>();
         }
 
         [Key]
@@ -19,6 +21,8 @@
 
         [Required]
         public int Duration { get; set; }
+
+        public virtual ICollection<Vacation> Vacations { get; set; }
 
         [Required]
         public string ProjectId { get; set; }
