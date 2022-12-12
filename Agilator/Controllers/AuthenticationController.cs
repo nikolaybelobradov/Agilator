@@ -47,11 +47,12 @@ namespace Agilator.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginDto model)
         {
             var errorMessages = new HashSet<string> { "Invalid Authentication" };
- 
-            
+
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+            {              
                 return Unauthorized(new AuthResponseDto { Errors = errorMessages });
+            }
 
 
             var signingCredentials = _jwtHandler.GetSigningCredentials();

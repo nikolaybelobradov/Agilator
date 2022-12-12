@@ -59,6 +59,16 @@ body {
     transform: scale(1.03);
 }
 
+.btn-primary:disabled,
+.btn-primary[disabled]{
+    background: var(--clr-gray);
+}
+
+.btn-primary:disabled:hover,
+.btn-primary[disabled]:hover{
+    transform: none;
+}
+
 #nav {
     display: flex;
     gap: 1.25rem;
@@ -431,6 +441,39 @@ table {
     i:hover {
         transform: scale(1.2);
     }
+}
 
+.errors{
+    border-radius: 2.125rem;
+    background: rgb(220, 35, 35, 0.2);
+    padding: 1.25rem;
 
+    .errors-header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.3125rem;
+        font-size: 0.875rem;
+        margin-bottom: 0.3125rem;
+
+        h3{
+            font-size: 1.125rem !important;
+        }
+    }
+
+    li{
+        padding: 0 1.875rem;
+        display: flex;
+        gap: 1.875rem;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 0.1875rem;
+    }
+}
+
+.input-error{
+    color:  rgb(220, 35, 35, 0.9);
+    margin-left: 2.5rem;
+    font-size: 0.875rem;    
 }

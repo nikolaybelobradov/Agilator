@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAuthResponseDto } from 'src/app/shared/interfaces/dtos/IAuthResponseDto';
 import { IUserLoginDto } from 'src/app/shared/interfaces/dtos/IUserLoginDto';
@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   returnUrl!: string;
   loginForm!: FormGroup;
+  errorMessage: string = '';
+  showError!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -24,8 +26,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -48,8 +50,12 @@ export class LoginComponent implements OnInit {
         }
         this.router.navigate([this.returnUrl]);
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = error.message;
+        if(this.errorMessage == '[object Object]')
+        this.errorMessage = 'Email and Password are required';
+        this.showError = true;
+      }
     });
   }
-
 }

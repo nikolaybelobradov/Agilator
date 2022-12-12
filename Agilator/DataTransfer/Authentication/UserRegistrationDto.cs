@@ -15,7 +15,7 @@
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "The passowrd and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password don't match.")]
         public string ConfirmPassword { get; set; }
 
     }
