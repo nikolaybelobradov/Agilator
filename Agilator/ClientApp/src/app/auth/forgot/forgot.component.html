@@ -1,0 +1,12 @@
+<section id="form">
+    <h1>Forgot Password</h1>
+    <p>Don't worry, it only takes a few minutes.</p>
+    <div class="box">
+        <h2>User details</h2>
+        <div class="input-element">
+            <label for="email">Email</label>
+            <input id="email" #email type="email" placeholder="j.smith@email.com">
+        </div>
+        <button (click)="sendPassword(email.value)" class="btn-primary">Submit</button>
+    </div>
+</section>

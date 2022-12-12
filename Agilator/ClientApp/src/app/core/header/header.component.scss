@@ -2,9 +2,11 @@
     padding: 2rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     #logo {
         display: flex;
+        align-items: center;
         text-decoration: none;
         color: var(--clr-black);
 

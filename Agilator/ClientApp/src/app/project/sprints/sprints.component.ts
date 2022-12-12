@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ICreateSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/ICreateSprintDto';
 import { IEditSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/IEditSprintDto';
 import { IVacationDto } from 'src/app/shared/interfaces/dtos/Vacation/IVacationDto';
@@ -14,8 +14,6 @@ import { SprintService } from 'src/app/shared/services/sprint.service';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { VacationService } from 'src/app/shared/services/vacation.service';
 import { ToastrService } from 'ngx-toastr';
-
-//@Input() counter = '';
 
 @Component({
   selector: 'app-sprints',
@@ -38,7 +36,7 @@ export class SprintsComponent implements OnInit {
 
   totalCapacityUnit: string = 'hours';
   capacityUnit: string = 'hours';
-  capacities: {[key: string]:string};
+  capacities: { [key: string]: string };
 
   constructor(
     private route: ActivatedRoute,
@@ -88,6 +86,7 @@ export class SprintsComponent implements OnInit {
   loadTeamMembers = () => {
     this.teamService.getTeamMembers('api/teamMember', this.projectId).subscribe(teamMembers => {
       this.teamMembers = teamMembers;
+      this.initCalcCapacity(this.selectedSprint, teamMembers);
     });
   }
 
@@ -97,12 +96,37 @@ export class SprintsComponent implements OnInit {
     });
   }
 
+  initCalcCapacity = (sprint: ISprint, teamMembers: ITeamMember[]) => {
+
+    teamMembers.forEach(member => {
+      
+      let vacationDays = this.loadTeamMemberVacation(sprint, member);
+      let sprintDays = this.transformSprintDurationInDays(sprint.duration);
+      let workingHours = member.workingHours;
+      let totalCapacityHours = sprintDays * workingHours;
+      let capacityHours = totalCapacityHours - vacationDays * workingHours;
+      let currentCapacity;
+
+      if (this.capacityUnit === 'days') {
+        currentCapacity = this.transformHoursToDays(capacityHours);
+      } else if (this.capacityUnit === '%') {
+        currentCapacity = this.transformHoursToPercentages(capacityHours, sprintDays);
+      } else {
+        currentCapacity = `${capacityHours} h`;
+      }
+
+      this.capacities = { ...this.capacities, [member.id]: `${currentCapacity}` }
+
+    });
+
+  }
+
   loadTeamMemberVacation = (sprint: ISprint, teamMember: ITeamMember): number => {
 
     let vacation = this.vacations.find
       (v => v.sprintId === sprint.id && v.teamMemberId === teamMember.id);
 
-    if (vacation) return vacation.duration;
+    if (vacation !== undefined) return vacation.duration; 
 
     return 0;
   }
@@ -121,6 +145,7 @@ export class SprintsComponent implements OnInit {
 
   onChangeCapacityUnit = (unit: string) => {
     this.capacityUnit = unit;
+    this.initCalcCapacity(this.selectedSprint, this.teamMembers);
   }
 
   transformHoursToDays = (hours: number): string => {
@@ -162,14 +187,17 @@ export class SprintsComponent implements OnInit {
     let workingHours = teamMember.workingHours;
     let totalCapacityHours = sprintDays * workingHours;
     let capacityHours = totalCapacityHours - vacationDays * workingHours;
+    let currentCapacity;
 
-    if (this.capacityUnit === 'days')
-      return this.transformHoursToDays(capacityHours);
+    if (this.capacityUnit === 'days'){
+      currentCapacity = this.transformHoursToDays(capacityHours);
+    }else if (this.capacityUnit === '%'){
+      currentCapacity = this.transformHoursToPercentages(capacityHours, sprintDays);
+    }else{
+      currentCapacity = `${capacityHours} h`;
+    }
 
-    if (this.capacityUnit === '%')
-      return this.transformHoursToPercentages(capacityHours, sprintDays);
-
-    return `${capacityHours} h`;
+    this.capacities = { ...this.capacities, [teamMember.id]: `${currentCapacity}` }
 
   }
 
@@ -215,6 +243,7 @@ export class SprintsComponent implements OnInit {
 
     this.vacationService.update("api/vacation", vacation).subscribe({
       next: () => {
+        this.calcCapacity(sprint, teamMember, Number(days));
       },
       error: (err: HttpErrorResponse) => console.log(err.error.errors)
     });
