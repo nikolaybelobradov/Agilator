@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IAuthResponseDto } from 'src/app/shared/interfaces/dtos/Auth/IAuthResponseDto';
 import { IUserLoginDto } from 'src/app/shared/interfaces/dtos/Auth/IUserLoginDto';
 import { AuthService } from '../../shared/services/auth.service';
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
     ) { };
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class LoginComponent implements OnInit {
         if(response.isSuccessful){
           this.authService.isAuthenticated();
         }
+        this.toastr.success('Successful login.', 'Message', { timeOut: 2500 });
         this.router.navigate([this.returnUrl]);
       },
       error: (error: HttpErrorResponse) => {

@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IUserRegistrationDto } from 'src/app/shared/interfaces/dtos/Auth/IUserRegistrationDto';
 import { AuthService } from '../../shared/services/auth.service';
 
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   errorMessage: string = '';
   showError!: boolean;
 
-  constructor(private authService: AuthService, private router: Router) { };
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { };
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -47,7 +48,10 @@ export class RegisterComponent implements OnInit {
     };
 
     this.authService.register("api/authentication/registration", user).subscribe({
-      next: (_) => this.router.navigate([`/auth/login`]),
+      next: () => {
+        this.toastr.success('Successful registration.', 'Message', { timeOut: 2500 });
+        this.router.navigate([`/auth/login`])
+      },
       error: (error: HttpErrorResponse) => {
         this.errorMessage = error.message;
         this.showError = true;
