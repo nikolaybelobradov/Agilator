@@ -5,18 +5,6 @@
     <div class="box">
         <h2>User details</h2>
 
-        <div *ngIf="showError" class="errors">
-            <div class="errors-header">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <h3>Errors</h3>
-            </div>
-            <ul role="list">
-                <li>
-                    <span [innerHTML]="errorMessage"></span>
-                </li>
-            </ul>
-        </div> 
-
         <div class="input-element">
             <label for="email">Email</label>
             <input id="email" formControlName="email" type="email" placeholder="j.smith@email.com">

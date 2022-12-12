@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,8 +15,6 @@ export class LoginComponent implements OnInit {
 
   returnUrl!: string;
   loginForm!: FormGroup;
-  errorMessage: string = '';
-  showError!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -53,11 +50,8 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Successful login.', 'Message', { timeOut: 2500 });
         this.router.navigate([this.returnUrl]);
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.message;
-        if(this.errorMessage == '[object Object]')
-        this.errorMessage = 'Email and Password are required';
-        this.showError = true;
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
   }

@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,8 +13,6 @@ import { AuthService } from '../../shared/services/auth.service';
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
-  errorMessage: string = '';
-  showError!: boolean;
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { };
 
@@ -29,14 +26,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  check = () => {
-    let asd = this.registerForm.controls['firstName'].errors;
-  }
-
-
   public register = (registerFormValue: any) => {
-
-    this.showError = false;
     const formValues = { ...registerFormValue };
 
     const user: IUserRegistrationDto = {
@@ -52,9 +42,8 @@ export class RegisterComponent implements OnInit {
         this.toastr.success('Successful registration.', 'Message', { timeOut: 2500 });
         this.router.navigate([`/auth/login`])
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.message;
-        this.showError = true;
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
   }
