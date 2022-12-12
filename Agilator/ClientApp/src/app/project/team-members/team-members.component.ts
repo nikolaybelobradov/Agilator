@@ -1,7 +1,7 @@
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ICreateTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/ICreateTeamMemberDto';
 import { IEditTeamMemberDto } from 'src/app/shared/interfaces/dtos/TeamMember/IEditTeamMemberDto';
@@ -37,12 +37,12 @@ export class TeamMembersComponent implements OnInit {
     this.teamMembers = [];
 
     this.addTeamMemberForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       workingHours: new FormControl(8),
     });
 
     this.editTeamMemberForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       workingHours: new FormControl(''),
     });
 
@@ -103,8 +103,7 @@ export class TeamMembersComponent implements OnInit {
           name: '',
           workingHours: 8,
         });
-      },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      }
     });
 
   }

@@ -27,16 +27,16 @@
                 </span>
             </div>
             <div class="input-element">
-                <label>Last Name</label>
-                <input formControlName="lastName" type="text" placeholder="Smith">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" formControlName="lastName" type="text" placeholder="Smith">
                 <span class="input-error" *ngIf="registerForm.controls['lastName'].errors">
                     <i class="fa-solid fa-circle-exclamation"></i>
                     Last name is required.
                 </span>
             </div>
             <div class="input-element">
-                <label>Email</label>
-                <input formControlName="email" type="email" placeholder="j.smith@email.com">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" type="email" placeholder="j.smith@email.com">
                 <span class="input-error" *ngIf="registerForm.controls['email'].errors?.['required']">
                     <i class="fa-solid fa-circle-exclamation"></i>
                     Email is required.
@@ -47,8 +47,8 @@
                 </span>
             </div>
             <div class="input-element">
-                <label>Password</label>
-                <input formControlName="password" type="password"
+                <label for="password">Password</label>
+                <input id="password" formControlName="password" type="password"
                     placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                 <span class="input-error" *ngIf="registerForm.controls['password'].errors">
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -56,8 +56,8 @@
                 </span>
             </div>
             <div class="input-element">
-                <label>Confirm Password</label>
-                <input formControlName="confirmPassword" type="password"
+                <label for="confirmPassword">Confirm Password</label>
+                <input id="confirmPassword" formControlName="confirmPassword" type="password"
                     placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                 <span class="input-error" *ngIf="registerForm.controls['confirmPassword'].errors">
                     <i class="fa-solid fa-circle-exclamation"></i>

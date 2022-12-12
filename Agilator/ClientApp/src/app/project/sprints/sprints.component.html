@@ -9,7 +9,14 @@
                 <ul role="list">
                     <li>
                         <h4>Add Sprint</h4>
+
                         <button (click)="showHidePanel('add', 'hide')"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </li>
+                    <li>
+                        <span class="input-error-mini" *ngIf="addSprintForm.controls['name'].errors?.['required']">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            Name is required.
+                        </span>
                     </li>
                     <li>
                         <input type="text" formControlName="name" placeholder="Sprint name" required>
@@ -36,7 +43,14 @@
                                 class="fa-solid fa-circle-xmark"></i></button>
                     </li>
                     <li>
+                        <span class="input-error-mini" *ngIf="editSprintForm.controls['name'].errors?.['required']">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            Name is required.
+                        </span>
+                    </li>
+                    <li>
                         <input type="text" formControlName="name" placeholder="Sprint name" required>
+
                     </li>
                     <li>
                         <select formControlName="duration" required>

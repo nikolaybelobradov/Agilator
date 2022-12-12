@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ICreateSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/ICreateSprintDto';
 import { IEditSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/IEditSprintDto';
@@ -56,12 +56,12 @@ export class SprintsComponent implements OnInit {
 
 
     this.addSprintForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       duration: new FormControl(2),
     });
 
     this.editSprintForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       duration: new FormControl(''),
     });
   }

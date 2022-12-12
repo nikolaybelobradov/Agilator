@@ -18,8 +18,8 @@
         </div> 
 
         <div class="input-element">
-            <label>Email</label>
-            <input formControlName="email" type="email" placeholder="j.smith@email.com">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" placeholder="j.smith@email.com">
             <span class="input-error" *ngIf="loginForm.controls['email'].errors?.['required']">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 Email is required.
@@ -30,8 +30,8 @@
             </span>
         </div>
         <div class="input-element">
-            <label>Password</label>
-            <input formControlName="password" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            <label for="password">Password</label>
+            <input id="password" formControlName="password" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
             <span class="input-error" *ngIf="loginForm.controls['password'].errors">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 Password is required.
