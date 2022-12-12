@@ -265,6 +265,7 @@ export class SprintsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${sprint.name}?`)) {
 
       this.sprintService.delete('api/sprint', sprint.id).subscribe(() => {
+        this.toastr.error('Sprint deleted.', 'Message', { timeOut: 2000 });
         this.loadSprints();
         this.selectedSprint = { id: '', name: '', duration: 0 };
       });
