@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IUserRegistrationDto } from '../shared/interfaces/dtos/IUserRegistrationDto';
-import { IUserLoginDto } from '../shared/interfaces/dtos/IUserLoginDto';
-import { IAuthResponseDto } from '../shared/interfaces/dtos/IAuthResponseDto';
+import { IUserRegistrationDto } from '../interfaces/dtos/Auth/IUserRegistrationDto';
+import { IUserLoginDto } from '../interfaces/dtos/Auth/IUserLoginDto';
+import { IAuthResponseDto } from '../interfaces/dtos/Auth/IAuthResponseDto';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment'
 import { Subject } from 'rxjs/internal/Subject';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { getRoute } from './helper';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +18,11 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   register (route: string, body: IUserRegistrationDto) {
-    return this.http.post<IAuthResponseDto> (this.getRoute(route), body);
+    return this.http.post<IAuthResponseDto> (getRoute(route), body);
   }
 
   login (route: string, body: IUserLoginDto) {
-    return this.http.post<IAuthResponseDto> (this.getRoute(route), body);
+    return this.http.post<IAuthResponseDto> (getRoute(route), body);
   }
 
   logout() {
@@ -39,9 +39,5 @@ export class AuthService {
     }
 
     return false;
-  }
-
-  private getRoute = (route: string) => {
-    return `${environment.baseUrl}/${route}`;
   }
 }

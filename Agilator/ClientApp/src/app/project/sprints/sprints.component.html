@@ -1,0 +1,169 @@
+<app-title [project]="project"></app-title>
+
+<div class="section-container">
+    <section id="sprints">
+        <h3>Sprints</h3>
+
+        <div *ngIf="isAddPanelVisible" id="add-sprint">
+            <form [formGroup]="addSprintForm" (ngSubmit)="add(addSprintForm.value)">
+                <ul role="list">
+                    <li>
+                        <h4>Add Sprint</h4>
+
+                        <button (click)="showHidePanel('add', 'hide')"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </li>
+                    <li>
+                        <span class="input-error-mini" *ngIf="addSprintForm.controls['name'].errors?.['required']">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            Name is required.
+                        </span>
+                    </li>
+                    <li>
+                        <input type="text" formControlName="name" placeholder="Sprint name" required>
+                    </li>
+                    <li>
+                        <select formControlName="duration" required>
+                            <option value="1">1 week</option>
+                            <option value="2">2 weeks</option>
+                            <option value="3">3 weeks</option>
+                            <option value="4">4 weeks</option>
+                        </select>
+                        <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <div *ngIf="isEditPanelVisible" id="add-sprint">
+            <form [formGroup]="editSprintForm" (ngSubmit)="edit(editSprintForm.value)">
+                <ul role="list">
+                    <li>
+                        <h4>Edit Sprint</h4>
+                        <button (click)="showHidePanel('edit', 'hide')"><i
+                                class="fa-solid fa-circle-xmark"></i></button>
+                    </li>
+                    <li>
+                        <span class="input-error-mini" *ngIf="editSprintForm.controls['name'].errors?.['required']">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            Name is required.
+                        </span>
+                    </li>
+                    <li>
+                        <input type="text" formControlName="name" placeholder="Sprint name" required>
+
+                    </li>
+                    <li>
+                        <select formControlName="duration" required>
+                            <option value="1">1 week</option>
+                            <option value="2">2 weeks</option>
+                            <option value="3">3 weeks</option>
+                            <option value="4">4 weeks</option>
+                        </select>
+                        <button type="submit"><i class="fa-solid fa-circle-check"></i></button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+
+        <div id="sprints-list">
+            <ul role="list">
+                <li (click)="showHidePanel('add', 'show')">
+                    <span>Add</span>
+                    <i class="fa-solid fa-plus"></i>
+                </li>
+                <li *ngFor="let sprint of sprints;" (click)="selectSprint(sprint.id)"
+                    [ngClass]="{'selected': sprint.id === selectedSprint.id}">
+                    <span>{{sprint.name}}</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="capacity-table">
+        <div *ngIf="selectedSprint.id !== ''" class="table-header">
+            <h3>{{selectedSprint.name}}: Capacity Table</h3>
+            <div class="icons">
+                <button (click)="showHidePanel('edit', 'show', selectedSprint)">
+                    <i class="fa-solid fa-file-pen"></i>
+                </button>
+                <button (click)="delete(selectedSprint)">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="selectedSprint.id !== ''" class="table-properties">
+            <ul role="list">
+                <li>
+                    <span>Total capacity: 100 %</span>
+                    <select #totalCapcityUnitSelect (change)="onChangeTotalCapacityUnit(totalCapcityUnitSelect.value)">
+                        <option value="hours" selected>Hours</option>
+                        <option value="days">Days</option>
+                        <option value="%">%</option>
+                    </select>
+                </li>
+                <li>
+                    <span>Vacation: 50 days</span>
+                    <select>
+                        <option>Hours</option>
+                        <option selected>Days</option>
+                        <option>%</option>
+                    </select>
+                </li>
+                <li>
+                    <span>Capacity: 80 hours</span>
+                    <select #capcityUnitSelect (change)="onChangeCapacityUnit(capcityUnitSelect.value)">
+                        <option value="hours" selected>Hours</option>
+                        <option value="days">Days</option>
+                        <option value="%">%</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <table *ngIf="selectedSprint.id !== ''">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Team Member</th>
+                    <th>Total Capacity</th>
+                    <th>Vacation</th>
+                    <th>Capacity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let teamMember of teamMembers; let i = index;">
+                    <td>{{i + 1}}</td>
+                    <td>{{teamMember.name}}</td>
+                    <td>{{calcTotalCapacity(selectedSprint, teamMember)}}</td>
+                    <td>
+                        <input type="number" min="0" max="{{transformSprintDurationInDays(selectedSprint.duration)}}"
+                            value="{{loadTeamMemberVacation(selectedSprint, teamMember)}}" #vacationDaysInput>
+                        <i (click)="updateVacation(selectedSprint, teamMember, vacationDaysInput.value)" class="fa-solid fa-circle-check"></i>
+
+                        days
+                    </td>
+                    <td>{{calcCapacity(selectedSprint, teamMember, loadTeamMemberVacation(selectedSprint, teamMember))}}</td>
+                </tr>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>№</th>
+                    <th>Team Member</th>
+                    <th>Total Capacity</th>
+                    <th>Vacation</th>
+                    <th>Capacity</th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <div class="empty-table" *ngIf="selectedSprint.id === ''">
+            <i class="fa-solid fa-hand-pointer"></i>
+            <p>No sprint selected.</p>
+        </div>
+
+    </section>
+</div>

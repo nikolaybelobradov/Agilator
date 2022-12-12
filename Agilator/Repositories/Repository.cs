@@ -12,11 +12,11 @@
         public Repository(ApplicationDbContext context)
         {
             dbContext = context;
-            
+
         }
         public async Task CreateAsync<T>(T entity) where T : class
         {
-                await this.dbContext.Set<T>().AddAsync(entity);
+            await this.dbContext.Set<T>().AddAsync(entity);
 
             _ = await this.dbContext.SaveChangesAsync();
         }

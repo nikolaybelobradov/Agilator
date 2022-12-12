@@ -1,0 +1,36 @@
+#footer{
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    span {
+        font-size: 0.75rem;
+        letter-spacing: 0.3rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        line-height: 2.125rem;
+        color: var(--clr-dark-gray)
+    }
+
+    #footer-icons{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        font-size: 1.5rem;
+
+        i{
+            margin: 0 1.25rem;
+            transition: 100ms;
+        }
+
+        i:hover{
+            transform: scale(1.1);
+        }
+
+    }
+}

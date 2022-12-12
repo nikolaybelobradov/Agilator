@@ -3,32 +3,66 @@
     <p>Already have an account? <a routerLink="/auth/login">Login here</a></p>
     <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
         <div class="box">
-            <p *ngIf="showError">
-                <span [innerHTML]="errorMessage"></span>
-            </p>
+
             <h2>User details</h2>
 
+            <div *ngIf="showError" class="errors">
+                <div class="errors-header">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <h3>Errors</h3>
+                </div>
+                <ul role="list">
+                    <li>
+                        <span [innerHTML]="errorMessage"></span>
+                    </li>
+                </ul>
+            </div> 
+
             <div class="input-element">
-                <label>First Name</label>
-                <input formControlName="firstName" type="text" placeholder="John">
+                <label for="firstName">First Name</label>
+                <input id="firstName" formControlName="firstName" type="text" placeholder="John" required>
+                <span class="input-error" *ngIf="registerForm.controls['firstName'].errors">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    First name is required.
+                </span>
             </div>
             <div class="input-element">
-                <label>Last Name</label>
-                <input formControlName="lastName" type="text" placeholder="Smith">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" formControlName="lastName" type="text" placeholder="Smith">
+                <span class="input-error" *ngIf="registerForm.controls['lastName'].errors">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Last name is required.
+                </span>
             </div>
             <div class="input-element">
-                <label>Email</label>
-                <input formControlName="email" type="email" placeholder="j.smith@email.com">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" type="email" placeholder="j.smith@email.com">
+                <span class="input-error" *ngIf="registerForm.controls['email'].errors?.['required']">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Email is required.
+                </span>
+                <span class="input-error" *ngIf="registerForm.controls['email'].errors?.['email']">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Email is not valid.
+                </span>
             </div>
             <div class="input-element">
-                <label>Password</label>
-                <input formControlName="password" type="password"
+                <label for="password">Password</label>
+                <input id="password" formControlName="password" type="password"
                     placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+                <span class="input-error" *ngIf="registerForm.controls['password'].errors">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Password is required.
+                </span>
             </div>
             <div class="input-element">
-                <label>Confirm Password</label>
-                <input formControlName="confirmPassword" type="password"
+                <label for="confirmPassword">Confirm Password</label>
+                <input id="confirmPassword" formControlName="confirmPassword" type="password"
                     placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+                <span class="input-error" *ngIf="registerForm.controls['confirmPassword'].errors">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Confirm password is required.
+                </span>
             </div>
             <button type="submit" class="btn-primary">Register</button>
         </div>

@@ -168,6 +168,7 @@ namespace Agilator.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProjectId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -190,24 +191,18 @@ namespace Agilator.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ProjectId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SprintId")
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("WorkingHours")
@@ -218,8 +213,6 @@ namespace Agilator.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("ProjectId");
-
-                    b.HasIndex("SprintId");
 
                     b.ToTable("TeamMembers");
                 });
@@ -491,20 +484,20 @@ namespace Agilator.Data.Migrations
 
             modelBuilder.Entity("Agilator.Models.Sprint", b =>
                 {
-                    b.HasOne("Agilator.Models.Project", null)
+                    b.HasOne("Agilator.Models.Project", "Project")
                         .WithMany("Sprints")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Agilator.Models.TeamMember", b =>
                 {
-                    b.HasOne("Agilator.Models.Project", null)
+                    b.HasOne("Agilator.Models.Project", "Project")
                         .WithMany("TeamMembers")
-                        .HasForeignKey("ProjectId");
-
-                    b.HasOne("Agilator.Models.Sprint", null)
-                        .WithMany("TeamMembers")
-                        .HasForeignKey("SprintId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Agilator.Models.Vacation", b =>

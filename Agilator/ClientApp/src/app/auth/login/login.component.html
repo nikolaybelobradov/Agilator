@@ -5,13 +5,37 @@
     <div class="box">
         <h2>User details</h2>
 
+        <div *ngIf="showError" class="errors">
+            <div class="errors-header">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <h3>Errors</h3>
+            </div>
+            <ul role="list">
+                <li>
+                    <span [innerHTML]="errorMessage"></span>
+                </li>
+            </ul>
+        </div> 
+
         <div class="input-element">
-            <label>Email</label>
-            <input formControlName="email" type="email" placeholder="j.smith@email.com">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" placeholder="j.smith@email.com">
+            <span class="input-error" *ngIf="loginForm.controls['email'].errors?.['required']">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Email is required.
+            </span>
+            <span class="input-error" *ngIf="loginForm.controls['email'].errors?.['email']">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Email is not valid.
+            </span>
         </div>
         <div class="input-element">
-            <label>Password</label>
-            <input formControlName="password" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            <label for="password">Password</label>
+            <input id="password" formControlName="password" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+            <span class="input-error" *ngIf="loginForm.controls['password'].errors">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Password is required.
+            </span>
         </div>
         <button type="submit" class="btn-primary">Login</button>
 

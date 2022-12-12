@@ -1,42 +1,43 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { IProjectDto } from 'src/app/shared/interfaces/dtos/IProjectDto';
-import { IResponseDto } from 'src/app/shared/interfaces/dtos/IResponseDto';
-import { ProjectService } from '../project.service';
+import { Component} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ICreateProjectDto } from 'src/app/shared/interfaces/dtos/Project/ICreateProjectDto';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html'
 })
-export class CreateProjectComponent implements OnInit {
+export class CreateProjectComponent {
 
-  createProjectForm!: FormGroup;
+  createProjectForm: FormGroup;
+  errorMessage: string = '';
+  showError!: boolean;
 
-  constructor(private projectService: ProjectService) { };
-
-  ngOnInit(): void {
-
+  constructor(private projectService: ProjectService, private router: Router) {
     this.createProjectForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       description: new FormControl(''),
     })
-
-  }
+  };
 
   public create = (createProjectFormValue: any) => {
     const formValues = { ...createProjectFormValue };
 
-    const project: IProjectDto = {
+    const project: ICreateProjectDto = {
       name: formValues.name,
       description: formValues.description
     };
 
     this.projectService.create("api/project/create", project).subscribe({
-      next: (response: IResponseDto) => {
-        console.log("Successful created project")
+      next: () => {
+        this.router.navigate([`/projects`])
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = error.message;
+        this.showError = true;
+      }
     });
 
   }

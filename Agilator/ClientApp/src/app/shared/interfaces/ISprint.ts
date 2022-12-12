@@ -1,9 +1,8 @@
-import { ITeamMember } from "../ITeamMember";
+import { IProject } from "./IProject";
 
 export interface ISprint{
 
     id: string;
     name: string;
     duration: number;
-    teamMembers: ITeamMember[];
 }

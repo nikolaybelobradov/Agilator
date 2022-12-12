@@ -3,8 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './core/home/home.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CreateProjectComponent } from './project/create-project/create-project.component';
+import { DetailsProjectComponent } from './project/details-project/details-project.component';
+import { EditProjectComponent } from './project/edit-project/edit-project.component';
 import { ProjectsComponent } from './project/projects/projects.component';
+import { SprintsComponent } from './project/sprints/sprints.component';
+import { TeamMembersComponent } from './project/team-members/team-members.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -16,8 +21,19 @@ const routes: Routes = [
   {path: 'auth/register', component: RegisterComponent},
 
   //Project
-  {path: 'project/all', component: ProjectsComponent, canActivate: [AuthGuard]},
+  {path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]},
   {path: 'project/create', component: CreateProjectComponent, canActivate: [AuthGuard]},
+  {path: 'project/details/:id', component: DetailsProjectComponent, canActivate: [AuthGuard]},
+  {path: 'project/edit/:id', component: EditProjectComponent, canActivate: [AuthGuard]},
+
+  //Team
+  {path: 'project/team-members/:id', component: TeamMembersComponent, canActivate: [AuthGuard]},
+
+  //Sprint
+  {path: 'project/sprints/:id', component: SprintsComponent, canActivate: [AuthGuard]},
+
+  //Error 404 - Not Found
+  {path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
