@@ -29,7 +29,7 @@ namespace Agilator.Controllers
         public async Task<ActionResult<IEnumerable<Sprint>>> All(string id)
         {
             var sprints = await _repository.SelectAll<Sprint>();
-            sprints = sprints.Where(s => s.ProjectId == id).ToList();
+            sprints = sprints.Where(s => s.ProjectId == id).OrderBy(s => s.CreatedOn).ToList();
 
             return sprints;
         }

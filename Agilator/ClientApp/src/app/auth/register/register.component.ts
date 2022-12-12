@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IUserRegistrationDto } from 'src/app/shared/interfaces/dtos/IUserRegistrationDto';
+import { IUserRegistrationDto } from 'src/app/shared/interfaces/dtos/Auth/IUserRegistrationDto';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({

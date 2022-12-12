@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IUserRegistrationDto } from '../interfaces/dtos/IUserRegistrationDto';
-import { IUserLoginDto } from '../interfaces/dtos/IUserLoginDto';
-import { IAuthResponseDto } from '../interfaces/dtos/IAuthResponseDto';
+import { IUserRegistrationDto } from '../interfaces/dtos/Auth/IUserRegistrationDto';
+import { IUserLoginDto } from '../interfaces/dtos/Auth/IUserLoginDto';
+import { IAuthResponseDto } from '../interfaces/dtos/Auth/IAuthResponseDto';
 import {HttpClient} from '@angular/common/http';
 import { Subject } from 'rxjs/internal/Subject';
 import { JwtHelperService } from '@auth0/angular-jwt';

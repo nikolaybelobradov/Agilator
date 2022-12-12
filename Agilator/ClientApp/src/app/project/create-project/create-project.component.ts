@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IProjectDto } from 'src/app/shared/interfaces/dtos/IProjectDto';
+import { ICreateProjectDto } from 'src/app/shared/interfaces/dtos/Project/ICreateProjectDto';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class CreateProjectComponent {
   public create = (createProjectFormValue: any) => {
     const formValues = { ...createProjectFormValue };
 
-    const project: IProjectDto = {
+    const project: ICreateProjectDto = {
       name: formValues.name,
       description: formValues.description
     };

@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IAuthResponseDto } from 'src/app/shared/interfaces/dtos/IAuthResponseDto';
-import { IUserLoginDto } from 'src/app/shared/interfaces/dtos/IUserLoginDto';
+import { IAuthResponseDto } from 'src/app/shared/interfaces/dtos/Auth/IAuthResponseDto';
+import { IUserLoginDto } from 'src/app/shared/interfaces/dtos/Auth/IUserLoginDto';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({

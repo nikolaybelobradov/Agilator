@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IProjectDto } from '../interfaces/dtos/IProjectDto';
+import { ICreateProjectDto } from '../interfaces/dtos/Project/ICreateProjectDto';
 import { IResponseDto } from '../interfaces/dtos/IResponseDto';
 import { IProject } from '../interfaces/IProject';
 import { getRoute } from './helper';
+import { IEditProjectDto } from '../interfaces/dtos/Project/IEditProjectDto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,11 @@ export class ProjectService {
     return this.http.get<IProject[]> (getRoute(route));
   }
 
-  create(route: string, body: IProjectDto) {
+  create(route: string, body: ICreateProjectDto) {
     return this.http.post<IResponseDto> (getRoute(route), body);
   }
 
-  edit(route: string, id: string, body: IProjectDto){
+  edit(route: string, id: string, body: IEditProjectDto){
     return this.http.put (getRoute(route, id), body);
   }
 

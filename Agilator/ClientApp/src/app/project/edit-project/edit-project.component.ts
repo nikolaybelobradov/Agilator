@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProjectDto } from 'src/app/shared/interfaces/dtos/IProjectDto';
+import { IEditProjectDto } from 'src/app/shared/interfaces/dtos/Project/IEditProjectDto';
 import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
@@ -50,7 +50,8 @@ export class EditProjectComponent implements OnInit {
   edit = (editProjectFormValue: any) => {
     const formValues = { ...editProjectFormValue };
 
-    const project: IProjectDto = {
+    const project: IEditProjectDto = {
+      id: this.id,
       name: formValues.name,
       description: formValues.description
     };
