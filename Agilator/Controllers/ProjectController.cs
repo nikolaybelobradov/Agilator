@@ -34,7 +34,7 @@
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var result = await _repository.SelectAll<Project>();
-            result = result.Where(r => r.OwnerId == user.Id).ToList();
+            result = result.Where(r => r.OwnerId == user.Id).OrderBy(s => s.CreatedOn).ToList();
 
             return result;
         }

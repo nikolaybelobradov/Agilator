@@ -29,7 +29,7 @@ namespace Agilator.Controllers
         public async Task<ActionResult<IEnumerable<TeamMember>>> All(string id)
         {
             var teamMembers = await _repository.SelectAll<TeamMember>();
-            teamMembers = teamMembers.Where(r => r.ProjectId == id).ToList();
+            teamMembers = teamMembers.Where(r => r.ProjectId == id).OrderBy(s => s.CreatedOn).ToList();
 
             return teamMembers;
         }
