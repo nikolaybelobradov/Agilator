@@ -4,13 +4,29 @@
     <div class="box">
         <h2>Project details</h2>
 
+        <div *ngIf="showError" class="errors">
+            <div class="errors-header">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <h3>Errors</h3>
+            </div>
+            <ul role="list">
+                <li>
+                    <span [innerHTML]="errorMessage"></span>
+                </li>
+            </ul>
+        </div> 
+
         <div class="input-element">
             <label for="name">Name</label>
-            <input id="name" formControlName="name" type="text" placeholder="MyProject" value="{{project.name}}">
+            <input id="name" formControlName="name" type="text" placeholder="MyProject">
+            <span class="input-error" *ngIf="editProjectForm.controls['name'].errors?.['required']">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Name is required.
+            </span>
         </div>
         <div class="input-element">
             <label for="description">Description</label>
-            <textarea id="description" formControlName="description" placeholder="Add your project description here..." rows="6" value="{{project.description}}"></textarea>
+            <textarea id="description" formControlName="description" placeholder="Add your project description here..." rows="6"></textarea>
         </div>
         <button type="submit" class="btn-primary">Edit</button>
     </div>

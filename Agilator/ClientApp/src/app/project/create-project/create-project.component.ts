@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IProjectDto } from 'src/app/shared/interfaces/dtos/IProjectDto';
-import { IResponseDto } from 'src/app/shared/interfaces/dtos/IResponseDto';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
@@ -12,10 +12,12 @@ import { ProjectService } from 'src/app/shared/services/project.service';
 export class CreateProjectComponent {
 
   createProjectForm: FormGroup;
+  errorMessage: string = '';
+  showError!: boolean;
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, private router: Router) {
     this.createProjectForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       description: new FormControl(''),
     })
   };
@@ -29,11 +31,13 @@ export class CreateProjectComponent {
     };
 
     this.projectService.create("api/project/create", project).subscribe({
-      next: (response: IResponseDto) => {
-        console.log("Successful created project")
-        //TODO REDIRECT
+      next: () => {
+        this.router.navigate([`/projects`])
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = error.message;
+        this.showError = true;
+      }
     });
 
   }
