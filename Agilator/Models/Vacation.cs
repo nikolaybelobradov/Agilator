@@ -1,6 +1,5 @@
 ﻿namespace Agilator.Models
 {
-    using Agilator.Models.Interfaces;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;

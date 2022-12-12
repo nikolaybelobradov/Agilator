@@ -97,7 +97,7 @@
         <div *ngIf="selectedSprint.id !== ''" class="table-properties">
             <ul role="list">
                 <li>
-                    <span>Total capacity: 100 %</span>
+                    <span>Total capacity</span>
                     <select #totalCapcityUnitSelect (change)="onChangeTotalCapacityUnit(totalCapcityUnitSelect.value)">
                         <option value="hours" selected>Hours</option>
                         <option value="days">Days</option>
@@ -105,15 +105,13 @@
                     </select>
                 </li>
                 <li>
-                    <span>Vacation: 50 days</span>
+                    <span>Vacation</span>
                     <select>
-                        <option>Hours</option>
                         <option selected>Days</option>
-                        <option>%</option>
                     </select>
                 </li>
                 <li>
-                    <span>Capacity: 80 hours</span>
+                    <span>Capacity</span>
                     <select #capcityUnitSelect (change)="onChangeCapacityUnit(capcityUnitSelect.value)">
                         <option value="hours" selected>Hours</option>
                         <option value="days">Days</option>

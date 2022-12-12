@@ -89,6 +89,18 @@
                 .WithOne(t => t.Project)
                 .HasForeignKey(p => p.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Vacation>()
+                .HasOne(t => t.TeamMember)
+                .WithMany(t => t.Vacations)
+                .HasForeignKey(t => t.TeamMemberId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Vacation>()
+                .HasOne(s => s.Sprint)
+                .WithMany(t => t.Vacations)
+                .HasForeignKey(s => s.SprintId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         private void ConfigureUserIdentityRelations(ModelBuilder builder)

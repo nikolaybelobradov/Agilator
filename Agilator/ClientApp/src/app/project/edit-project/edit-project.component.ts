@@ -1,7 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IEditProjectDto } from 'src/app/shared/interfaces/dtos/Project/IEditProjectDto';
 import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ProjectService } from 'src/app/shared/services/project.service';
@@ -16,13 +16,12 @@ export class EditProjectComponent implements OnInit {
 
   id: string;
   project: IProject;
-  errorMessage: string = '';
-  showError!: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectService: ProjectService) {
+    private projectService: ProjectService,
+    private toastr: ToastrService) {
     this.id = this.route.snapshot.params['id'];
     this.project = {id: '', name: '', description: '', sprints: []};
 
@@ -58,11 +57,11 @@ export class EditProjectComponent implements OnInit {
 
     this.projectService.edit("api/project", this.id, project).subscribe({
       next: () => {
+        this.toastr.warning('Successful edited project.', 'Message', { timeOut: 2500 });
         this.router.navigate([`/project/details/${this.id}`]);
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.message;
-        this.showError = true;
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
 

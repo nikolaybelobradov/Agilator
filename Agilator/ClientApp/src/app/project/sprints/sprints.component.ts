@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { ICreateSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/ICreateSprintDto';
 import { IEditSprintDto } from 'src/app/shared/interfaces/dtos/Sprint/IEditSprintDto';
 import { IVacationDto } from 'src/app/shared/interfaces/dtos/Vacation/IVacationDto';
@@ -13,6 +13,7 @@ import { ProjectService } from 'src/app/shared/services/project.service';
 import { SprintService } from 'src/app/shared/services/sprint.service';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { VacationService } from 'src/app/shared/services/vacation.service';
+import { ToastrService } from 'ngx-toastr';
 
 //@Input() counter = '';
 
@@ -44,7 +45,8 @@ export class SprintsComponent implements OnInit {
     private projectService: ProjectService,
     private teamService: TeamService,
     private sprintService: SprintService,
-    private vacationService: VacationService) {
+    private vacationService: VacationService,
+    private toastr: ToastrService) {
 
     this.projectId = this.route.snapshot.params['id'];
     this.selectedSprint = { id: '', name: '', duration: 0 };
@@ -234,16 +236,17 @@ export class SprintsComponent implements OnInit {
           name: '',
           duration: 2,
         });
+        this.toastr.success('Successful added sprint.', 'Message', { timeOut: 2500 });
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
+      }
     });
 
   }
 
   edit = (editSprintFormValue: any) => {
     const formValues = { ...editSprintFormValue };
-
-    //TODO IF ID = NULL
     const sprint: IEditSprintDto = {
       id: this.sprintId,
       name: formValues.name,
@@ -254,8 +257,11 @@ export class SprintsComponent implements OnInit {
       next: () => {
         this.loadSprints();
         this.isEditPanelVisible = false;
+        this.toastr.warning('Successful edited sprint.', 'Message', { timeOut: 2500 });
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
+      }
     });
   }
 
@@ -263,7 +269,9 @@ export class SprintsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${sprint.name}?`)) {
 
       this.sprintService.delete('api/sprint', sprint.id).subscribe(() => {
+        this.toastr.error('Sprint deleted.', 'Message', { timeOut: 2500 });
         this.loadSprints();
+        this.selectedSprint = { id: '', name: '', duration: 0 };
       });
     }
   }

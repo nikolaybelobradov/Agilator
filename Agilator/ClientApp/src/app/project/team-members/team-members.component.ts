@@ -1,5 +1,4 @@
 
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +8,7 @@ import { IProject } from 'src/app/shared/interfaces/IProject';
 import { ITeamMember } from 'src/app/shared/interfaces/ITeamMember';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { TeamService } from 'src/app/shared/services/team.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-team-members',
@@ -29,7 +29,8 @@ export class TeamMembersComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private toastr: ToastrService) {
 
   
     this.projectId = this.route.snapshot.params['id'];
@@ -103,6 +104,10 @@ export class TeamMembersComponent implements OnInit {
           name: '',
           workingHours: 8,
         });
+        this.toastr.success('Successful added team member.', 'Message', { timeOut: 2500 });
+      },
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
       }
     });
 
@@ -111,7 +116,6 @@ export class TeamMembersComponent implements OnInit {
   edit = (editTeamMemberFormValue: any) => {
     const formValues = { ...editTeamMemberFormValue };
 
-    //TODO IF ID = NULL
     const teamMember: IEditTeamMemberDto = {
       id: this.teamMemberId,
       name: formValues.name,
@@ -122,8 +126,11 @@ export class TeamMembersComponent implements OnInit {
       next: () => {
         this.loadTeamMembers();
         this.isEditPanelVisible = false;
+        this.toastr.warning('Successful edited team member.', 'Message', { timeOut: 2500 });
       },
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
+      error: () => {
+        this.toastr.error('Incorrect data entered.', 'Message', { timeOut: 2500 });
+      }
     });
   }
 
@@ -131,6 +138,7 @@ export class TeamMembersComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${teamMember.name}?`)) {
 
       this.teamService.delete('api/teamMember', teamMember.id).subscribe(() => {
+        this.toastr.error('Team Member deleted.', 'Message', { timeOut: 2500 });
         this.loadTeamMembers();
       });
     }
