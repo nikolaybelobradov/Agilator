@@ -236,7 +236,7 @@ export class SprintsComponent implements OnInit {
           name: '',
           duration: 2,
         });
-        this.toastr.success('Successful added sprint.', 'Message', { timeOut: 2000 });
+        this.toastr.success('Successful added sprint.', 'Message', { timeOut: 2500 });
       },
       error: (err: HttpErrorResponse) => console.log(err.error.errors)
     });
@@ -255,7 +255,7 @@ export class SprintsComponent implements OnInit {
       next: () => {
         this.loadSprints();
         this.isEditPanelVisible = false;
-        this.toastr.warning('Successful edited sprint.', 'Message', { timeOut: 2000 });
+        this.toastr.warning('Successful edited sprint.', 'Message', { timeOut: 2500 });
       },
       error: (err: HttpErrorResponse) => console.log(err.error.errors)
     });
@@ -265,7 +265,7 @@ export class SprintsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${sprint.name}?`)) {
 
       this.sprintService.delete('api/sprint', sprint.id).subscribe(() => {
-        this.toastr.error('Sprint deleted.', 'Message', { timeOut: 2000 });
+        this.toastr.error('Sprint deleted.', 'Message', { timeOut: 2500 });
         this.loadSprints();
         this.selectedSprint = { id: '', name: '', duration: 0 };
       });

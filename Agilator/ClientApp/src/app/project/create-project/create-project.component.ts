@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ICreateProjectDto } from 'src/app/shared/interfaces/dtos/Project/ICreateProjectDto';
 import { ProjectService } from 'src/app/shared/services/project.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-project',
@@ -15,7 +16,10 @@ export class CreateProjectComponent {
   errorMessage: string = '';
   showError!: boolean;
 
-  constructor(private projectService: ProjectService, private router: Router) {
+  constructor(
+    private projectService: ProjectService, 
+    private router: Router,
+    private toastr: ToastrService) {
     this.createProjectForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl(''),
@@ -32,7 +36,8 @@ export class CreateProjectComponent {
 
     this.projectService.create("api/project/create", project).subscribe({
       next: () => {
-        this.router.navigate([`/projects`])
+        this.toastr.success('Successful created project.', 'Message', { timeOut: 2500 });
+        this.router.navigate([`/projects`]);
       },
       error: (error: HttpErrorResponse) => {
         this.errorMessage = error.message;

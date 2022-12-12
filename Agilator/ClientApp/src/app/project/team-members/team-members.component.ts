@@ -105,7 +105,7 @@ export class TeamMembersComponent implements OnInit {
           name: '',
           workingHours: 8,
         });
-        this.toastr.success('Successful added team member.', 'Message', { timeOut: 2000 });
+        this.toastr.success('Successful added team member.', 'Message', { timeOut: 2500 });
       }
     });
 
@@ -124,7 +124,7 @@ export class TeamMembersComponent implements OnInit {
       next: () => {
         this.loadTeamMembers();
         this.isEditPanelVisible = false;
-        this.toastr.warning('Successful edited team member.', 'Message', { timeOut: 2000 });
+        this.toastr.warning('Successful edited team member.', 'Message', { timeOut: 2500 });
       },
       error: (err: HttpErrorResponse) => console.log(err.error.errors)
     });
@@ -134,7 +134,7 @@ export class TeamMembersComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${teamMember.name}?`)) {
 
       this.teamService.delete('api/teamMember', teamMember.id).subscribe(() => {
-        this.toastr.error('Team Member deleted.', 'Message', { timeOut: 2000 });
+        this.toastr.error('Team Member deleted.', 'Message', { timeOut: 2500 });
         this.loadTeamMembers();
       });
     }
