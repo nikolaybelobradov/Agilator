@@ -9,6 +9,7 @@ import { DetailsProjectComponent } from './details-project/details-project.compo
 import { TeamMembersComponent } from './team-members/team-members.component';
 import { SprintsComponent } from './sprints/sprints.component';
 import { TitleComponent } from './title/title.component';
+import { ChartsComponent } from './charts/charts.component';
 
 
 
@@ -21,6 +22,7 @@ import { TitleComponent } from './title/title.component';
     TeamMembersComponent,
     SprintsComponent,
     TitleComponent,
+    ChartsComponent,
   ],
   imports: [
     CommonModule,
