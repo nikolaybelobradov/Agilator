@@ -77,3 +77,9 @@ Install FE Packages
   npm install
 ```
 
+## Acknowledgements
+
+ - [Time Management Tool and Tips](https://www.figma.com/file/JGgikRUlkegtfeIl4KYp3u/Time-Management-Tool-and-Tips-(Community))
+ - [Chart.js](https://www.chartjs.org/)
+ - [Toastr](https://github.com/CodeSeven/toastr)
+
