@@ -5,6 +5,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './core/home/home.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ChartsComponent } from './project/charts/charts.component';
 import { CreateProjectComponent } from './project/create-project/create-project.component';
 import { DetailsProjectComponent } from './project/details-project/details-project.component';
 import { EditProjectComponent } from './project/edit-project/edit-project.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
 
   //Sprint
   {path: 'project/sprints/:id', component: SprintsComponent, canActivate: [AuthGuard]},
+
+  //Chart
+  {path: 'project/charts/:id', component: ChartsComponent, canActivate: [AuthGuard]},
+
 
   //Error 404 - Not Found
   {path: '**', component: NotFoundComponent }
