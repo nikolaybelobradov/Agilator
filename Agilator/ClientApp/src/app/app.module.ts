@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ErrorHandlerService } from './shared/errors/error-handler.service';
 import { ProjectModule } from './project/project.module';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
@@ -38,11 +37,6 @@ import { ToastrModule } from 'ngx-toastr';
       }
     })
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: ErrorHandlerService,
-    multi: true
-  }],
   bootstrap: [AppComponent]
 })
 
