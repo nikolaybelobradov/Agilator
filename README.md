@@ -11,14 +11,14 @@ The team members could work at different working hours in the different projects
 
 Calculated data can be visualized in hours, days or percentages.
 
-This project is the defense project for Angular course at Software University.
+This project is the defense project for Angular course at [Software University](https://softuni.bg/).
 
 
 ## Tech Stack
 
 **Client:** Angular, HTML, SCSS, TypeScript
 
-**Server:** ASP.NET Core, MSSQL Server
+**Server:** ASP.NET Core, EF Core,  MSSQL Server
 
 
 ## Authors
@@ -47,6 +47,10 @@ Sprints
 
 ![Sprints](https://github.com/nikolaybelobradov/Agilator/blob/main/Screenshots/Sprints.png?raw=true)
 
+Charts
+
+![Charts](https://github.com/nikolaybelobradov/Agilator/blob/main/Screenshots/Chart.png?raw=true)
+
 
 ## Color Reference
 
@@ -59,5 +63,23 @@ Sprints
 | Gray | #d9d9d9 |
 | Light Gray | #d9dbe9 |
 
+## Installation
 
+Apply Entity Framework Core Migrations
+```bash
+Update-Database
+```
+
+
+Install FE Packages
+
+```bash
+  npm install
+```
+
+## Acknowledgements
+
+ - [Time Management Tool and Tips](https://www.figma.com/file/JGgikRUlkegtfeIl4KYp3u/Time-Management-Tool-and-Tips-(Community))
+ - [Chart.js](https://www.chartjs.org/)
+ - [Toastr](https://github.com/CodeSeven/toastr)
 
