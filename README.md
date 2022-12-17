@@ -11,14 +11,14 @@ The team members could work at different working hours in the different projects
 
 Calculated data can be visualized in hours, days or percentages.
 
-This project is the defense project for Angular course at Software University.
+This project is the defense project for Angular course at [Software University](https://softuni.bg/).
 
 
 ## Tech Stack
 
 **Client:** Angular, HTML, SCSS, TypeScript
 
-**Server:** ASP.NET Core, MSSQL Server
+**Server:** ASP.NET Core, EF Core,  MSSQL Server
 
 
 ## Authors
