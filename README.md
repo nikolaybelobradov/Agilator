@@ -47,6 +47,10 @@ Sprints
 
 ![Sprints](https://github.com/nikolaybelobradov/Agilator/blob/main/Screenshots/Sprints.png?raw=true)
 
+Charts
+
+![Charts](https://github.com/nikolaybelobradov/Agilator/blob/main/Screenshots/Chart.png?raw=true)
+
 
 ## Color Reference
 
@@ -59,5 +63,17 @@ Sprints
 | Gray | #d9d9d9 |
 | Light Gray | #d9dbe9 |
 
+## Installation
 
+Apply Entity Framework Core Migrations
+```bash
+Update-Database
+```
+
+
+Install FE Packages
+
+```bash
+  npm install
+```
 
