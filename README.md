@@ -77,6 +77,14 @@ Install FE Packages
   npm install
 ```
 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your file
+
+`baseUrl` - ClientApp/environment
+
+`ASPNETCORE_ENVIRONMENT` - launchSettings.json
+
 ## Acknowledgements
 
  - [Time Management Tool and Tips](https://www.figma.com/file/JGgikRUlkegtfeIl4KYp3u/Time-Management-Tool-and-Tips-(Community))
